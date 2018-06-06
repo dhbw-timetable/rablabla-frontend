@@ -21,16 +21,16 @@ const darkTheme = createMuiTheme({
 const alternativeTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#3d70b2',
-      light: '#729ee4',
-      dark: '#004582',
+      main: '#3057d5',
+      light: '#7183ff',
+      dark: '#002fa3',
       contrastText: '#ffffff',
     },
     secondary: {
-      main: '#5596e6',
-      light: '#8cc6ff',
-      dark: '#0069b3',
-      contrastText: '#ffffff',
+      main: '#8bffdc',
+      light: '#c0ffff',
+      dark: '#56cbaa',
+      contrastText: '#000000',
     },
     // error: will use the default color
   },
@@ -45,10 +45,10 @@ const lightTheme = createMuiTheme({
       contrastText: '#000000',
     },
     secondary: {
-      main: '#afbdc4',
-      light: '#e1eff7',
-      dark: '#808d94',
-      contrastText: '#000000',
+      main: '#f44336',
+      light: '#ff7961',
+      dark: '#ba000d',
+      contrastText: '#ffffff',
     },
     // error: will use the default color
   },
