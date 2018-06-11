@@ -5,6 +5,7 @@ import moment from 'moment';
 import { lightTheme, darkTheme, alternativeTheme } from './Themes';
 import NavigationBar from './NavigationBar';
 import Body from './Body';
+import getWeekEvents from './BackendConnection';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,11 +27,28 @@ export default class App extends React.Component {
   }
 
   setDisplayDate = (displayDate) => {
+    // TODO: Fetch event data
     this.setState({ displayDate });
   }
 
   doRefresh = () => {
-    // TODO: Implement backend call
+    getWeekEvents(this.state.url, this.state.displayDate, this.onGetDone, this.onGetFail);
+  }
+
+  showPreferences = () => {
+
+  }
+
+  showDatePicker = () => {
+
+  }
+
+  onGetDone = () => {
+
+  }
+
+  onGetFail = () => {
+
   }
 
   render() {
@@ -45,6 +63,8 @@ export default class App extends React.Component {
             setTheme={this.setTheme}
             doRefresh={this.doRefresh}
             darkFont={theme === lightTheme}
+            showPreferences={this.showPreferences}
+            showDatePicker={this.showDatePicker}
           />
           <Body setTheme={this.setTheme} />
         </MuiThemeProvider>

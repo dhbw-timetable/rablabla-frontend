@@ -14,6 +14,8 @@ import logo from './logo.svg';
 import logoDark from './logo_dark.svg';
 
 export default class NavigationBar extends React.Component {
+  githubAnchor = null;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +38,14 @@ export default class NavigationBar extends React.Component {
 
   render() {
     const { anchorEl, titleMode } = this.state;
-    const { displayDate, darkFont, doRefresh, setDisplayDate } = this.props;
+    const {
+      displayDate,
+      darkFont,
+      doRefresh,
+      setDisplayDate,
+      showPreferences,
+      showDatePicker,
+    } = this.props;
 
     const open = Boolean(anchorEl);
 
@@ -96,9 +105,21 @@ export default class NavigationBar extends React.Component {
                 doRefresh();
               }}
               >Refresh</MenuItem>
-              <MenuItem onClick={this.handleMenuClose}>ICS</MenuItem>
-              <MenuItem onClick={this.handleMenuClose}>GitHub</MenuItem>
-              <MenuItem onClick={this.handleMenuClose}>Preferences</MenuItem>
+              <MenuItem onClick={() => { this.githubAnchor.click(); }}>
+                <a
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                  href="https://github.com/dhbw-timetable"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  ref={el => this.githubAnchor = el}
+                  onClick={this.handleMenuClose}
+                >
+                  GitHub
+                </a>
+              </MenuItem>
+              <MenuItem onClick={() => { this.handleMenuClose(); showPreferences(); }}>
+                Preferences
+              </MenuItem>
             </Menu>
             <IconButton
               style={{
@@ -122,7 +143,7 @@ export default class NavigationBar extends React.Component {
                 right: 0,
               }}
               color="secondary"
-              onClick={() => { /* TODO: Implement */ }}
+              onClick={() => { showDatePicker(); }}
             >
               <Apps />
             </IconButton>
@@ -152,6 +173,8 @@ NavigationBar.propTypes = {
   // setTheme: PropTypes.func.isRequired,
   doRefresh: PropTypes.func.isRequired,
   setDisplayDate: PropTypes.func.isRequired,
+  showPreferences: PropTypes.func.isRequired,
+  showDatePicker: PropTypes.func.isRequired,
 };
 
 NavigationBar.defaultProps = {
