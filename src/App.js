@@ -12,23 +12,41 @@ import germanLang from './Texts_de';
 import englishLang from './Texts_en';
 
 export default class App extends React.Component {
+  raplaLink = window.localStorage.getItem('raplaLink');
+
   constructor(props) {
     super(props);
 
-    moment.locale('en');
+    if (this.raplaLink === null) {
+      // TODO: Onboarding
+    }
+
+    let weekStartsOnMonday = window.localStorage.getItem('weekStartsOnMonday');
+    if (weekStartsOnMonday === null) {
+      weekStartsOnMonday = true;
+    } else {
+      weekStartsOnMonday = weekStartsOnMonday === true;
+    }
+
+    // TODO: Set week starting day in moment js
+
+    moment.locale(window.localStorage.getItem('mmtLocale') || 'de');
+
+    const languageSetting = window.localStorage.getItem('language') || 'german';
 
     this.state = {
-      theme: darkTheme,
+      theme: this.getTheme(window.localStorage.getItem('theme')) || darkTheme,
       displayDate: moment(),
       preferencesOpen: false,
       datePickerOpen: false,
-      weekStartsOnMonday: true,
-      languageSetting: 'english',
-      language: englishLang,
+      weekStartsOnMonday,
+      languageSetting,
+      language: languageSetting === 'german' ? germanLang : englishLang,
     };
   }
 
   setWeekStartsOnMonday = (weekStartsOnMonday) => {
+    window.localStorage.setItem('weekStartsOnMonday', weekStartsOnMonday ? 'true' : 'false');
     this.setState({ weekStartsOnMonday });
   }
 
@@ -37,9 +55,12 @@ export default class App extends React.Component {
   };
 
   setLanguage = (languageString) => {
-    moment.locale(languageString === 'german' ? 'de' : 'en');
-    // rebuild the moment to apply the new locale
+    const mmtLocale = languageString === 'german' ? 'de' : 'en';
+    window.localStorage.setItem('mmtLocale', mmtLocale);
+    moment.locale(mmtLocale);
+    // force rebuild the moment to apply the new locale
     const d = this.state.displayDate;
+    window.localStorage.setItem('language', languageString);
     this.setState({
       displayDate: moment(`${d.month() + 1}-${d.date()}-${d.year()}`, 'MM-DD-YYYY'),
       languageSetting: languageString,
@@ -47,13 +68,16 @@ export default class App extends React.Component {
     });
   }
 
-  setTheme = (themeString) => {
-    let theme;
+  getTheme = (themeString) => {
     if (themeString === 'dark') {
-      theme = darkTheme;
-    } else {
-      theme = themeString === 'light' ? lightTheme : alternativeTheme;
+      return darkTheme;
     }
+    return themeString === 'light' ? lightTheme : alternativeTheme;
+  };
+
+  setTheme = (themeString) => {
+    const theme = this.getTheme(themeString);
+    window.localStorage.setItem('theme', themeString);
     this.setState({ theme });
   }
 
@@ -92,6 +116,13 @@ export default class App extends React.Component {
     this.setState({ datePickerOpen: false });
   }
 
+  setLink = (link) => {
+    this.raplaLink = link;
+    window.localStorage.setItem('raplaLink', link);
+    this.setState({ displayDate: moment() });
+    this.doRefresh();
+  }
+
   onGetDone = () => {
 
   }
@@ -123,9 +154,11 @@ export default class App extends React.Component {
             theme={this.getThemeString(theme)}
             setLanguage={this.setLanguage}
             languageSetting={languageSetting}
-            hidePreferences={this.hidePreferences}
             weekStartsOnMonday={weekStartsOnMonday}
             setWeekStartsOnMonday={this.setWeekStartsOnMonday}
+            raplaLink={this.raplaLink}
+            setLink={this.setLink}
+            hidePreferences={this.hidePreferences}
           />
         </MuiThemeProvider>
       </React.Fragment>

@@ -47,11 +47,13 @@ export default class Preferences extends React.Component {
               </code>
             </DialogContentText>
             <TextField
+              value={this.props.raplaLink}
               margin="dense"
               id="pref-link"
               label={language.TIMETABLE_CONNECTION_LABEL}
               type="link"
               fullWidth
+              onChange={(e) => { this.props.setLink(e.target.value); }}
             />
             <Typography
               variant="title"
@@ -135,4 +137,6 @@ Preferences.propTypes = {
   language: PropTypes.object.isRequired,
   setLanguage: PropTypes.func.isRequired,
   hidePreferences: PropTypes.func.isRequired,
+  raplaLink: PropTypes.string.isRequired,
+  setLink: PropTypes.func.isRequired,
 };
