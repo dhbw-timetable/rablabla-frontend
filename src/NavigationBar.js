@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import logo from './logo.svg';
 import logoDark from './logo_dark.svg';
 
+require('moment/locale/de.js');
+
 export default class NavigationBar extends React.Component {
   githubAnchor = null;
 
@@ -38,14 +40,8 @@ export default class NavigationBar extends React.Component {
 
   render() {
     const { anchorEl, titleMode } = this.state;
-    const {
-      displayDate,
-      darkFont,
-      doRefresh,
-      setDisplayDate,
-      showPreferences,
-      showDatePicker,
-    } = this.props;
+    const { language, displayDate, darkFont, doRefresh,
+      setDisplayDate, showPreferences, showDatePicker } = this.props;
 
     const open = Boolean(anchorEl);
 
@@ -104,7 +100,7 @@ export default class NavigationBar extends React.Component {
                 this.handleMenuClose();
                 doRefresh();
               }}
-              >Refresh</MenuItem>
+              >{language.REFRESH}</MenuItem>
               <MenuItem onClick={() => { this.githubAnchor.click(); }}>
                 <a
                   style={{ textDecoration: 'none', color: 'inherit' }}
@@ -114,11 +110,11 @@ export default class NavigationBar extends React.Component {
                   ref={el => this.githubAnchor = el}
                   onClick={this.handleMenuClose}
                 >
-                  GitHub
+                  {language.GITHUB}
                 </a>
               </MenuItem>
               <MenuItem onClick={() => { this.handleMenuClose(); showPreferences(); }}>
-                Preferences
+                {language.PREFERENCES}
               </MenuItem>
             </Menu>
             <IconButton
@@ -168,9 +164,9 @@ export default class NavigationBar extends React.Component {
 }
 
 NavigationBar.propTypes = {
+  language: PropTypes.object.isRequired,
   displayDate: PropTypes.object.isRequired,
   darkFont: PropTypes.bool,
-  // setTheme: PropTypes.func.isRequired,
   doRefresh: PropTypes.func.isRequired,
   setDisplayDate: PropTypes.func.isRequired,
   showPreferences: PropTypes.func.isRequired,
