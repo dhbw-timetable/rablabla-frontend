@@ -7,19 +7,23 @@ import 'moment/locale/en-gb';
 import { lightTheme, darkTheme, alternativeTheme } from './Themes';
 import NavigationBar from './NavigationBar';
 import Preferences from './Preferences';
+import Onboarding from './Onboarding';
 import getWeekEvents from './BackendConnection';
 import germanLang from './Texts_de';
 import englishLang from './Texts_en';
 
 export default class App extends React.Component {
-  raplaLink = window.localStorage.getItem('raplaLink');
+  raplaLink = null;
 
   constructor(props) {
     super(props);
 
-    if (this.raplaLink === null) {
-      // TODO: Onboarding
-    }
+    let onboardingOpen = false;
+    this.raplaLink = window.localStorage.getItem('raplaLink');
+    //if (this.raplaLink === null) {
+      console.log('onboarding...');
+      onboardingOpen = true;
+    //}
 
     let weekStartsOnMonday = window.localStorage.getItem('weekStartsOnMonday');
     if (weekStartsOnMonday === null) {
@@ -33,9 +37,10 @@ export default class App extends React.Component {
     moment.locale(window.localStorage.getItem('mmtLocale') || 'de');
 
     const languageSetting = window.localStorage.getItem('language') || 'german';
-
+    const theme = window.localStorage.getItem('theme');
     this.state = {
-      theme: this.getTheme(window.localStorage.getItem('theme')) || darkTheme,
+      onboardingOpen,
+      theme: theme !== null ? this.getTheme(theme) : darkTheme,
       displayDate: moment(),
       preferencesOpen: false,
       datePickerOpen: false,
@@ -66,6 +71,10 @@ export default class App extends React.Component {
       languageSetting: languageString,
       language: this.getLanguage(languageString),
     });
+  }
+
+  toggleLanguage = () => {
+    this.setLanguage(this.state.languageSetting === 'german' ? 'english' : 'german');
   }
 
   getTheme = (themeString) => {
@@ -104,7 +113,11 @@ export default class App extends React.Component {
     this.setState({ preferencesOpen: true });
   }
 
-  hidePreferences = () => {
+  hidePreferences = (link) => {
+    this.raplaLink = link;
+    window.localStorage.setItem('raplaLink', link);
+
+    this.doRefresh();
     this.setState({ preferencesOpen: false });
   }
 
@@ -116,11 +129,10 @@ export default class App extends React.Component {
     this.setState({ datePickerOpen: false });
   }
 
-  setLink = (link) => {
+  applyOnboarding = (link) => {
     this.raplaLink = link;
     window.localStorage.setItem('raplaLink', link);
-    this.setState({ displayDate: moment() });
-    this.doRefresh();
+    this.setState({ onboardingOpen: false });
   }
 
   onGetDone = () => {
@@ -133,7 +145,7 @@ export default class App extends React.Component {
 
   render() {
     const { displayDate, theme, preferencesOpen, weekStartsOnMonday,
-      languageSetting, language } = this.state;
+      languageSetting, language, onboardingOpen } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -157,8 +169,13 @@ export default class App extends React.Component {
             weekStartsOnMonday={weekStartsOnMonday}
             setWeekStartsOnMonday={this.setWeekStartsOnMonday}
             raplaLink={this.raplaLink}
-            setLink={this.setLink}
             hidePreferences={this.hidePreferences}
+          />
+          <Onboarding
+            language={language}
+            open={onboardingOpen}
+            applyOnboarding={this.applyOnboarding}
+            toggleLanguage={this.toggleLanguage}
           />
         </MuiThemeProvider>
       </React.Fragment>

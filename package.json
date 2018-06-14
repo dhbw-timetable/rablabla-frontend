@@ -2,6 +2,7 @@
   "name": "rablabla-frontend",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://dhbw-timetable.github.io/rablabla-frontend/",
   "dependencies": {
     "@material-ui/core": "^1.2.0",
     "@material-ui/icons": "^1.1.0",
@@ -31,6 +32,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css",
-    "sass:build": "sass — update src/styles/scss:src/styles/css"
+    "sass:build": "sass — update src/styles/scss:src/styles/css",
+    "deploy": "gh-pages -d build"
   }
 }

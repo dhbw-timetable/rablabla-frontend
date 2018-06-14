@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default class Preferences extends React.Component {
+  linkRef = null;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,10 +27,10 @@ export default class Preferences extends React.Component {
       <div>
         <Dialog
           open={this.props.open}
-          onClose={this.props.hidePreferences}
-          aria-labelledby="form-dialog-title"
+          onClose={() => { this.props.hidePreferences(this.linkRef.value); }}
+          aria-labelledby="form-pref-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">{language.PREFERENCES}</DialogTitle>
+          <DialogTitle id="form-pref-dialog-title">{language.PREFERENCES}</DialogTitle>
           <DialogContent>
             <Typography variant="title" component="h4">
               {language.TIMETABLE_CONNECTION}
@@ -53,7 +55,7 @@ export default class Preferences extends React.Component {
               label={language.TIMETABLE_CONNECTION_LABEL}
               type="link"
               fullWidth
-              onChange={(e) => { this.props.setLink(e.target.value); }}
+              inputRef={el => this.linkRef = el}
             />
             <Typography
               variant="title"
@@ -138,5 +140,4 @@ Preferences.propTypes = {
   setLanguage: PropTypes.func.isRequired,
   hidePreferences: PropTypes.func.isRequired,
   raplaLink: PropTypes.string.isRequired,
-  setLink: PropTypes.func.isRequired,
 };

@@ -19,4 +19,12 @@ export default {
   LANGUAGE: 'Sprache',
   LANGUAGE_DESCRIPTION: 'Wir sprechen Deutsch und English',
   CLOSE: 'Schließen',
+  ONBOARDING: 'Willkommen',
+  ONBOARDING_DESCRIPTION: 'Wir freuen uns, dass du dich für Rablabla interessierst. Ein freies, open-source Projekt, gestartet von Studenten der DHBW.',
+  LEGAL_TITLE: 'Rechtliches',
+  LEGAL_DESCRIPTION1: 'Rablabla ist ein nicht-kommerzielles, rein privates Studienprojekt. Für unseren Service benutzen wir Google Fonts. ',
+  LEGAL_GFONTS_MORE: 'Mehr Informationen',
+  LEGAL_GFONTS_LINK: 'https://developers.google.com/fonts/faq',
+  LEGAL_DESCRIPTION2: 'Rablabla selbst verwendet in seiner Originalversion keine Funktionalitäten die personenbezogene Daten persistent speichern können. Wir schützen somit deine Daten GDPR(DSGVO) konform.',
+  ACCEPT: 'Zustimmen',
 };
