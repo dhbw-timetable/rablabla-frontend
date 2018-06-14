@@ -12,6 +12,26 @@ import Typography from '@material-ui/core/Typography';
 export default class Onboarding extends React.Component {
   linkRef = null;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      linkValid: true,
+    };
+  }
+
+  isLinkValid = (link) => {
+    return /https:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/.test(link);
+  };
+
+  onAgree = () => {
+    const link = this.linkRef.value;
+    const linkValid = this.isLinkValid(link);
+    this.setState({ linkValid });
+    if (linkValid) {
+      this.props.applyOnboarding(link);
+    }
+  };
+
   render() {
     const { language } = this.props;
     return (
@@ -40,12 +60,18 @@ export default class Onboarding extends React.Component {
               </code>
             </DialogContentText>
             <TextField
+              error={!this.state.linkValid}
               margin="dense"
               id="onboarding-link"
               label={language.TIMETABLE_CONNECTION_LABEL}
+              helperText={this.state.linkValid ? language.TIMETABLE_CONNECTION_LABEL_VALID
+                : language.TIMETABLE_CONNECTION_LABEL_INVALID}
               type="link"
               fullWidth
               inputRef={el => this.linkRef = el}
+              onChange={(e) => {
+                this.setState({ linkValid: this.isLinkValid(e.target.value) });
+              }}
             />
             <Typography
               variant="title"
@@ -56,7 +82,12 @@ export default class Onboarding extends React.Component {
             </Typography>
             <DialogContentText>
               {language.LEGAL_DESCRIPTION1}
-              <a style={{ textDecoration: 'none' }} href={language.LEGAL_GFONTS_LINK}>
+              <a
+                style={{ textDecoration: 'none' }}
+                href={language.LEGAL_GFONTS_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {language.LEGAL_GFONTS_MORE}
               </a>
               <br /><br />
@@ -72,10 +103,7 @@ export default class Onboarding extends React.Component {
               Language
             </Button>
             <Button
-              onClick={() => {
-                // TODO: validate link
-                this.props.applyOnboarding(this.linkRef.value);
-              }}
+              onClick={this.onAgree}
               color="secondary"
             >
               {language.ACCEPT}

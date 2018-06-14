@@ -22,12 +22,14 @@ export default class NavigationBar extends React.Component {
     super(props);
     this.state = {
       anchorEl: null,
-      titleMode: 0,
+      titleMode: parseInt(window.localStorage.getItem('titleMode'), 0) || 0,
     };
   }
 
   toggleTitleMode = () => {
-    this.setState({ titleMode: this.state.titleMode === 2 ? 0 : this.state.titleMode + 1 });
+    const titleMode = this.state.titleMode === 2 ? 0 : this.state.titleMode + 1;
+    window.localStorage.setItem('titleMode', titleMode);
+    this.setState({ titleMode });
   };
 
   handleMenuOpen = (event) => {

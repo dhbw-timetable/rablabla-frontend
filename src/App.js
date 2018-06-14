@@ -20,10 +20,9 @@ export default class App extends React.Component {
 
     let onboardingOpen = false;
     this.raplaLink = window.localStorage.getItem('raplaLink');
-    //if (this.raplaLink === null) {
-      console.log('onboarding...');
+    if (this.raplaLink === null) {
       onboardingOpen = true;
-    //}
+    }
 
     let weekStartsOnMonday = window.localStorage.getItem('weekStartsOnMonday');
     if (weekStartsOnMonday === null) {
