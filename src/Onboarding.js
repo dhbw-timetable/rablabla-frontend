@@ -17,6 +17,14 @@ export default class Onboarding extends React.Component {
     this.state = {
       linkValid: true,
     };
+
+    if (props.open) {
+      window.addEventListener('keypress', this.handleKeypress);
+    }
+  }
+
+  handleKeypress = (e) => {
+    if (e.keyCode === 13) this.onAgree();
   }
 
   isLinkValid = (link) => {
@@ -28,6 +36,7 @@ export default class Onboarding extends React.Component {
     const linkValid = this.isLinkValid(link);
     this.setState({ linkValid });
     if (linkValid) {
+      window.removeEventListener('keypress', this.handleKeypress);
       this.props.applyOnboarding(link);
     }
   };

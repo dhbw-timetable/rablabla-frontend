@@ -139,5 +139,9 @@ Preferences.propTypes = {
   language: PropTypes.object.isRequired,
   setLanguage: PropTypes.func.isRequired,
   hidePreferences: PropTypes.func.isRequired,
-  raplaLink: PropTypes.string.isRequired,
+  raplaLink: PropTypes.string,
+};
+
+Preferences.defaultProps = {
+  raplaLink: '',
 };

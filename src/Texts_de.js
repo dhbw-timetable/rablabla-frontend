@@ -27,6 +27,6 @@ export default {
   LEGAL_DESCRIPTION1: 'Rablabla ist ein nicht-kommerzielles, rein privates Studienprojekt. Für unseren Service benutzen wir Google Fonts. ',
   LEGAL_GFONTS_MORE: 'Mehr Informationen',
   LEGAL_GFONTS_LINK: 'https://developers.google.com/fonts/faq',
-  LEGAL_DESCRIPTION2: 'Rablabla selbst verwendet in seiner Originalversion keine Funktionalitäten die personenbezogene Daten persistent auf unseren Servern speichern können. Wir schützen somit deine Daten GDPR(DSGVO) konform.',
+  LEGAL_DESCRIPTION2: 'Rablabla selbst verwendet in seiner Originalversion keine Funktionalitäten die personenbezogene Daten persistent auf unseren Servern speichern können. Wir schützen somit deine Daten GDPR(DSGVO) konform. Durch Benutzen dieser Web Applikation akzeptierst du diese Konditionen.',
   ACCEPT: 'Zustimmen',
 };
