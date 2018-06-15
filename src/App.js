@@ -1,6 +1,9 @@
 import React from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { DatePicker } from 'material-ui-pickers';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
@@ -14,6 +17,7 @@ import englishLang from './Texts_en';
 
 export default class App extends React.Component {
   raplaLink = null;
+  datePickerInput = null;
 
   constructor(props) {
     super(props);
@@ -42,7 +46,6 @@ export default class App extends React.Component {
       theme: theme !== null ? this.getTheme(theme) : darkTheme,
       displayDate: moment(),
       preferencesOpen: false,
-      datePickerOpen: false,
       weekStartsOnMonday,
       languageSetting,
       language: languageSetting === 'german' ? germanLang : englishLang,
@@ -121,11 +124,7 @@ export default class App extends React.Component {
   }
 
   showDatePicker = () => {
-    this.setState({ datePickerOpen: true });
-  }
-
-  hideDatePicker = () => {
-    this.setState({ datePickerOpen: false });
+    this.datePickerInput.click();
   }
 
   applyOnboarding = (link) => {
@@ -149,33 +148,46 @@ export default class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
-          <NavigationBar
-            language={language}
-            displayDate={displayDate}
-            setDisplayDate={this.setDisplayDate}
-            doRefresh={this.doRefresh}
-            darkFont={theme === lightTheme}
-            showPreferences={this.showPreferences}
-            showDatePicker={this.showDatePicker}
-          />
-          <Preferences
-            language={language}
-            open={preferencesOpen}
-            setTheme={this.setTheme}
-            theme={this.getThemeString(theme)}
-            setLanguage={this.setLanguage}
-            languageSetting={languageSetting}
-            weekStartsOnMonday={weekStartsOnMonday}
-            setWeekStartsOnMonday={this.setWeekStartsOnMonday}
-            raplaLink={this.raplaLink}
-            hidePreferences={this.hidePreferences}
-          />
-          <Onboarding
-            language={language}
-            open={onboardingOpen}
-            applyOnboarding={this.applyOnboarding}
-            toggleLanguage={this.toggleLanguage}
-          />
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <NavigationBar
+              language={language}
+              displayDate={displayDate}
+              setDisplayDate={this.setDisplayDate}
+              doRefresh={this.doRefresh}
+              darkFont={theme === lightTheme}
+              showPreferences={this.showPreferences}
+              showDatePicker={this.showDatePicker}
+            />
+            <DatePicker
+              style={{ display: 'none' }}
+              showTodayButton
+              inputRef={el => this.datePickerInput = el}
+              value={displayDate}
+              okLabel={language.DATE_PICKER_OK}
+              cancelLabel={language.DATE_PICKER_CANCEL}
+              todayLabel={language.DATE_PICKER_TODAY}
+              onChange={(newValue) => { this.setState({ displayDate: newValue }); }}
+              animateYearScrolling={false}
+            />
+            <Preferences
+              language={language}
+              open={preferencesOpen}
+              setTheme={this.setTheme}
+              theme={this.getThemeString(theme)}
+              setLanguage={this.setLanguage}
+              languageSetting={languageSetting}
+              weekStartsOnMonday={weekStartsOnMonday}
+              setWeekStartsOnMonday={this.setWeekStartsOnMonday}
+              raplaLink={this.raplaLink}
+              hidePreferences={this.hidePreferences}
+            />
+            <Onboarding
+              language={language}
+              open={onboardingOpen}
+              applyOnboarding={this.applyOnboarding}
+              toggleLanguage={this.toggleLanguage}
+            />
+          </MuiPickersUtilsProvider>
         </MuiThemeProvider>
       </React.Fragment>
     );

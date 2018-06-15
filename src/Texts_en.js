@@ -29,4 +29,7 @@ export default {
   LEGAL_GFONTS_LINK: 'https://developers.google.com/fonts/faq',
   LEGAL_DESCRIPTION2: 'Rablabla itself in its unmodified version does not use any functionalities which are able to store personal data persistantly on our servers. Therefore we protect your data GDPR compliant. You accept these conditions via using start using this web application.',
   ACCEPT: 'Accept',
+  DATE_PICKER_TODAY: 'Today',
+  DATE_PICKER_OK: 'OK',
+  DATE_PICKER_CANCEL: 'Cancel',
 };
