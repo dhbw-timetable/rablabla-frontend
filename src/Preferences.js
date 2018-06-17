@@ -19,7 +19,26 @@ export default class Preferences extends React.Component {
     super(props);
     this.state = {
     };
+
+    if (props.open) {
+      window.addEventListener('keypress', this.handleKeypress);
+    }
   }
+
+  componentDidUpdate = () => {
+    if (this.props.open) {
+      window.addEventListener('keypress', this.handleKeypress);
+    }
+  };
+
+  handleKeypress = (e) => {
+    if (e.keyCode === 13) this.handleClose();
+  };
+
+  handleClose = () => {
+    window.removeEventListener('keypress', this.handleKeypress);
+    this.props.hidePreferences(this.linkRef.value);
+  };
 
   render() {
     const { language } = this.props;
@@ -27,7 +46,7 @@ export default class Preferences extends React.Component {
       <div>
         <Dialog
           open={this.props.open}
-          onClose={() => { this.props.hidePreferences(this.linkRef.value); }}
+          onClose={this.handleClose}
           aria-labelledby="form-pref-dialog-title"
         >
           <DialogTitle id="form-pref-dialog-title">{language.PREFERENCES}</DialogTitle>
@@ -49,7 +68,7 @@ export default class Preferences extends React.Component {
               </code>
             </DialogContentText>
             <TextField
-              value={this.props.raplaLink}
+              defaultValue={this.props.raplaLink}
               margin="dense"
               id="pref-link"
               label={language.TIMETABLE_CONNECTION_LABEL}
@@ -119,7 +138,7 @@ export default class Preferences extends React.Component {
             </Select>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.hidePreferences} color="secondary">
+            <Button onClick={this.handleClose} color="secondary">
               {language.CLOSE}
             </Button>
           </DialogActions>
