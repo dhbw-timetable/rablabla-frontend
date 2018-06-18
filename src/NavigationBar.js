@@ -46,17 +46,16 @@ export default class NavigationBar extends React.Component {
       setDisplayDate, showPreferences, showDatePicker } = this.props;
 
     const open = Boolean(anchorEl);
-
     let titleComponent;
     if (titleMode === 0) { // MONTH
       titleComponent = (
         <Typography onClick={this.toggleTitleMode} variant="title" color="inherit">
-          {`${displayDate.format('MMMM YYYY')}`}
+          {`${displayDate.format(document.body.clientWidth > 350 ? 'MMMM YYYY' : 'MMMM')}`}
         </Typography>);
     } else if (titleMode === 1) { // KW
       titleComponent = (
         <Typography onClick={this.toggleTitleMode} variant="title" color="inherit">
-          {`KW${displayDate.isoWeek()} ${displayDate.format('YYYY')}`}
+          {`KW${displayDate.isoWeek()} ${document.body.clientWidth > 350 ? displayDate.format('YYYY') : ''}`}
         </Typography>);
     } else { // REACT
       titleComponent = (
@@ -71,8 +70,8 @@ export default class NavigationBar extends React.Component {
     }
 
     return (
-      <div>
-        <AppBar position="static">
+      <div >
+        <AppBar className="navbar">
           <Toolbar>
             {titleComponent}
             <IconButton

@@ -8,8 +8,10 @@ import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
 import { lightTheme, darkTheme, alternativeTheme } from './Themes';
+import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
 import Preferences from './Preferences';
+import WeekView from './WeekView';
 import Onboarding from './Onboarding';
 import getWeekEvents from './BackendConnection';
 import germanLang from './Texts_de';
@@ -18,6 +20,7 @@ import englishLang from './Texts_en';
 export default class App extends React.Component {
   raplaLink = null;
   datePickerInput = null;
+  navbar = null;
 
   constructor(props) {
     super(props);
@@ -40,16 +43,26 @@ export default class App extends React.Component {
     moment.locale(window.localStorage.getItem('mmtLocale') || 'de');
 
     const languageSetting = window.localStorage.getItem('language') || 'german';
-    const theme = window.localStorage.getItem('theme');
+
+    const themeString = window.localStorage.getItem('theme');
+    const theme = themeString !== null ? this.getTheme(themeString) : darkTheme;
+
+    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
+
     this.state = {
+      navbarHeight: 0,
       onboardingOpen,
-      theme: theme !== null ? this.getTheme(theme) : darkTheme,
+      theme,
       displayDate: moment(),
       preferencesOpen: false,
       weekStartsOnMonday,
       languageSetting,
       language: languageSetting === 'german' ? germanLang : englishLang,
     };
+
+    window.addEventListener('resize', () => {
+      this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+    });
   }
 
   setWeekStartsOnMonday = (weekStartsOnMonday) => {
@@ -89,6 +102,9 @@ export default class App extends React.Component {
   setTheme = (themeString) => {
     const theme = this.getTheme(themeString);
     window.localStorage.setItem('theme', themeString);
+
+    document.querySelector('body').style['background-color'] = 'purple';
+
     this.setState({ theme });
   }
 
@@ -102,7 +118,7 @@ export default class App extends React.Component {
   }
 
   setDisplayDate = (displayDate) => {
-    // TODO: Fetch event data
+    // TODO: Fetch event data?
     this.setState({ displayDate });
   }
 
@@ -141,14 +157,19 @@ export default class App extends React.Component {
 
   }
 
+  componentDidMount() {
+    this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+  }
+
   render() {
     const { displayDate, theme, preferencesOpen, weekStartsOnMonday,
-      languageSetting, language, onboardingOpen } = this.state;
+      languageSetting, language, onboardingOpen, navbarHeight } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
           <MuiPickersUtilsProvider utils={MomentUtils}>
+            <StatusBar color={theme.palette.primary.main} />
             <NavigationBar
               language={language}
               displayDate={displayDate}
@@ -180,6 +201,13 @@ export default class App extends React.Component {
               setWeekStartsOnMonday={this.setWeekStartsOnMonday}
               raplaLink={this.raplaLink}
               hidePreferences={this.hidePreferences}
+            />
+            <WeekView
+              style={{
+                top: `${navbarHeight}px`,
+                height: `calc(100vh - ${navbarHeight}px)`,
+              }}
+              language={language}
             />
             <Onboarding
               language={language}

@@ -19,7 +19,7 @@ export default {
   WEEK_STARTING_DAY: 'Erster Tag der Woche',
   WEEK_STARTING_DAY_DESCRIPTION: 'Mach dein Häkchen, wenn bei dir die Woche am Montag beginnt!',
   LANGUAGE: 'Sprache',
-  LANGUAGE_DESCRIPTION: 'Wir sprechen Deutsch und English',
+  LANGUAGE_DESCRIPTION: 'Wir sprechen Deutsch und Englisch.',
   CLOSE: 'Schließen',
   ONBOARDING: 'Willkommen',
   ONBOARDING_DESCRIPTION: 'Wir freuen uns, dass du dich für Rablabla interessierst. Ein freies, open-source Projekt, gestartet von Studenten der DHBW Stuttgart.',

@@ -88,7 +88,7 @@ export default class Preferences extends React.Component {
             </DialogContentText>
             <Select
               value={this.props.theme}
-              style={{ width: '33%' }}
+              style={{ width: '100%', maxWidth: '250px' }}
               onChange={(e) => { this.props.setTheme(e.target.value); }}
               inputProps={{
                 name: 'theme',
@@ -126,7 +126,7 @@ export default class Preferences extends React.Component {
             </DialogContentText>
             <Select
               value={this.props.languageSetting}
-              style={{ width: '33%' }}
+              style={{ width: '100%', maxWidth: '250px' }}
               onChange={(e) => { this.props.setLanguage(e.target.value); }}
               inputProps={{
                 name: 'language',

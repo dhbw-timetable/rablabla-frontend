@@ -1,4 +1,12 @@
+#root {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overflow-y: hidden;
+}
+
 body {
+  min-width: 300px;
   margin: 0;
   padding: 0;
   font-family: Roboto, sans-serif;
@@ -7,6 +15,34 @@ body {
 h4 {
   font-size: 1rem !important;
   margin-bottom: 15px !important;
+}
+
+.navbar {
+}
+
+.weekview {
+  position: absolute;
+  min-width: 600px;
+  background-color: green;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+
+.dayheader {
+  background-color: lightgreen;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 400;
+  padding-top: 6px;
+  margin: 0;
+}
+
+.dayview {
+  width: calc(100vw / 7);
+  background-color: blue;
 }
 
 .onboarding-actions {
@@ -33,6 +69,23 @@ h4 {
 
 .App-intro {
   font-size: large;
+}
+
+@media (max-width: 1000px) {
+  .dayview {
+    width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .weekview {
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+
+  .dayview {
+    width: 100px;
+  }
 }
 
 @keyframes App-logo-spin {
