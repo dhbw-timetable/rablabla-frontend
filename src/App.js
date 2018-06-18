@@ -10,6 +10,7 @@ import 'moment/locale/en-gb';
 import { lightTheme, darkTheme, alternativeTheme } from './Themes';
 import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
+import SideTimeView from './SideTimeView';
 import Preferences from './Preferences';
 import WeekView from './WeekView';
 import Onboarding from './Onboarding';
@@ -157,45 +158,6 @@ export default class App extends React.Component {
 
   }
 
-  renderBackgroundLines = (start, end) => {
-    const lines = end - start;
-    return (Array(lines).fill().map((_, i) => {
-      return (
-        <span
-          className="sidetimesview-line"
-          key={`line${i}`}
-          style={{
-            top: `calc(${(100 / lines) * i}% + 95px)`,
-          }}
-        />
-      );
-    }));
-  };
-
-  renderSideTimes = (start, end) => {
-    const lines = end - start;
-    return (
-      <div
-        className="sidetimesview-times-container"
-        style={{
-          backgroundColor: this.state.theme.palette.primary.light,
-        }}
-      >
-        {Array(lines).fill().map((_, i) => {
-          return (
-              <span
-                className="sidetimesview-time"
-                key={`time${i}`}
-                style={{
-                  color: this.state.theme.palette.primary.dark,
-                  top: `calc(${(100 / lines) * i}% - 6.5px)`,
-                }}
-              >{i + start}</span>
-          );
-        })}
-      </div>);
-  };
-
   componentDidMount() {
     this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
   }
@@ -203,8 +165,6 @@ export default class App extends React.Component {
   render() {
     const { displayDate, theme, preferencesOpen, weekStartsOnMonday,
       languageSetting, language, onboardingOpen, navbarHeight } = this.state;
-    const start = 7;
-    const end = 19;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -251,8 +211,7 @@ export default class App extends React.Component {
               theme={theme}
               language={language}
             />
-            {this.renderSideTimes(start, end)}
-            {this.renderBackgroundLines(start, end)}
+            <SideTimeView theme={theme} />
             <Onboarding
               language={language}
               open={onboardingOpen}

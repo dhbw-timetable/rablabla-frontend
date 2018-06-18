@@ -43,7 +43,6 @@ export default class WeekView extends React.Component {
 WeekView.propTypes = {
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
-  // language: PropTypes.object.isRequired,
 };
 
 WeekView.defaultProps = {
