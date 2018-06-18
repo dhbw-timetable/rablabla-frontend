@@ -20,12 +20,47 @@ h4 {
 .navbar {
 }
 
+.sidetimesview-container {
+  height: 100%;
+  width: 25px;
+  position: fixed;
+  top: 95px;
+  padding-left: 5px;
+  z-index: 0;
+}
+
+.sidetimesview-times-container {
+  position: absolute;
+  z-index: 2;
+}
+
+.sidetimesview-time {
+  text-align: right;
+  width: 20px;
+  position: absolute;
+  font-size: 16px;
+  line-height: 16px;
+  left: 0;
+  z-index: 1;
+}
+
+.sidetimesview-line {
+  width: 100vw;
+  height: 2px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 25px;
+  z-index: 1;
+}
+
 .weekview {
   position: absolute;
   min-width: 600px;
   display: inline-flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
+  left: 25px;
+  z-index: 1;
 }
 
 .dayheader {
@@ -34,12 +69,47 @@ h4 {
   text-align: center;
   white-space: nowrap;
   font-weight: 400;
-  padding-top: 6px;
+  padding: 6px 0;
+  margin: 0 !important;
+}
+
+.event {
+  color: white;
+  width: calc(100vw / 7);
+  background-color: #273238;
+  border-radius: 3px;
+  padding: 8px;
+  position: absolute;
+  top: calc((100% / 13) * 1); // calculated time: e.g 08:00
+  height: calc((100% / 13) * 4); // calculated duration e.g 4h
+}
+
+.event-time {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}
+
+.event-title {
   margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.event-description {
+  margin: 0;
+  font-size: 14px;
+  position: absolute;
+  bottom: 8px; // padding correcture
 }
 
 .dayview {
   width: calc(100vw / 7);
+  z-index: 1;
+}
+
+.daybody {
+  position: relative;
+  z-index: 1;
 }
 
 .onboarding-actions {
@@ -68,9 +138,13 @@ h4 {
   font-size: large;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1550px) {
+  .event {
+    width: 220px;
+  }
+
   .dayview {
-    width: 140px;
+    width: 220px;
   }
 }
 
@@ -80,8 +154,12 @@ h4 {
     height: calc(100vh - 56px);
   }
 
+  .event {
+    width: 150px;
+  }
+
   .dayview {
-    width: 100px;
+    width: 150px;
   }
 }
 

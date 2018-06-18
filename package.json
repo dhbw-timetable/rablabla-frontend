@@ -12,7 +12,8 @@
     "moment": "^2.22.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "react-dom": "^16.3.0",
+    "react-dotdotdot": "^1.2.3"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

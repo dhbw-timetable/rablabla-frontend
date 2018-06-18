@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Dotdotdot from 'react-dotdotdot';
 
 export default class WeekView extends React.Component {
 
@@ -16,30 +17,24 @@ export default class WeekView extends React.Component {
       backgroundColor: theme.palette.primary.light,
       color: theme.palette.primary.contrastText,
     };
+    const daybodyStyle = {
+      height: '100%',
+    };
 
     return (
       <div className="weekview" style={style}>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Mo. 11.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Di. 12.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Mi. 13.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Do. 14.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Fr. 15.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>Sa. 16.</h4>
-        </div>
-        <div className="dayview" style={dayviewStyle}>
-          <h4 className="dayheader" style={dayheaderStyle}>So. 17.</h4>
-        </div>
+        {Array(7).fill().map((_, i) => {
+          return (<div key={`day${i}`} className="dayview" style={dayviewStyle}>
+            <h4 className="dayheader" style={dayheaderStyle}>Mi. 13.</h4>
+            <div className="daybody" style={daybodyStyle}>
+              <div className="event">
+                <Dotdotdot clamp={1}><p className="event-time">07:00 - 12:00</p></Dotdotdot>
+                <Dotdotdot clamp={2}><p className="event-title">Very Long Lineare Algebra</p></Dotdotdot>
+                <Dotdotdot clamp={1}><p className="event-description">Ein tolles Fach. Oskar Dunkeldich</p></Dotdotdot>
+              </div>
+            </div>
+          </div>);
+        })}
       </div>
     );
   }

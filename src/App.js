@@ -13,6 +13,7 @@ import NavigationBar from './NavigationBar';
 import Preferences from './Preferences';
 import WeekView from './WeekView';
 import Onboarding from './Onboarding';
+import SideTimeView from './SideTimeView';
 import getWeekEvents from './BackendConnection';
 import germanLang from './Texts_de';
 import englishLang from './Texts_en';
@@ -47,7 +48,7 @@ export default class App extends React.Component {
     const themeString = window.localStorage.getItem('theme');
     const theme = themeString !== null ? this.getTheme(themeString) : darkTheme;
 
-    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
+    document.querySelector('body').style['background-color'] = theme.palette.primary.light;
 
     this.state = {
       navbarHeight: 0,
@@ -103,7 +104,7 @@ export default class App extends React.Component {
     const theme = this.getTheme(themeString);
     window.localStorage.setItem('theme', themeString);
 
-    document.querySelector('body').style['background-color'] = 'purple';
+    document.querySelector('body').style['background-color'] = theme.palette.primary.light;
 
     this.setState({ theme });
   }
@@ -210,6 +211,7 @@ export default class App extends React.Component {
               theme={theme}
               language={language}
             />
+            <SideTimeView theme={theme} />
             <Onboarding
               language={language}
               open={onboardingOpen}
