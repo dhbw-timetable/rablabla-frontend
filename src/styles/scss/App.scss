@@ -20,18 +20,13 @@ h4 {
 .navbar {
 }
 
-.sidetimesview-container {
+.sidetimesview-times-container {
   height: 100%;
   width: 25px;
   position: fixed;
   top: 95px;
   padding-left: 5px;
-  z-index: 0;
-}
-
-.sidetimesview-times-container {
-  position: absolute;
-  z-index: 2;
+  z-index: 10;
 }
 
 .sidetimesview-time {
@@ -41,16 +36,15 @@ h4 {
   font-size: 16px;
   line-height: 16px;
   left: 0;
-  z-index: 1;
 }
 
 .sidetimesview-line {
   width: 100vw;
   height: 2px;
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   left: 25px;
-  z-index: 1;
+  z-index: 0;
 }
 
 .weekview {
@@ -60,7 +54,6 @@ h4 {
   flex-wrap: nowrap;
   justify-content: space-evenly;
   left: 25px;
-  z-index: 1;
 }
 
 .dayheader {
@@ -75,13 +68,13 @@ h4 {
 
 .event {
   color: white;
-  width: calc(100vw / 7);
   background-color: #273238;
   border-radius: 3px;
   padding: 8px;
   position: absolute;
   top: calc((100% / 13) * 1); // calculated time: e.g 08:00
   height: calc((100% / 13) * 4); // calculated duration e.g 4h
+  width: calc(100vw / 7);
 }
 
 .event-time {
@@ -104,12 +97,11 @@ h4 {
 
 .dayview {
   width: calc(100vw / 7);
-  z-index: 1;
 }
 
 .daybody {
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 
 .onboarding-actions {
