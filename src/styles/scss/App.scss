@@ -23,14 +23,12 @@ h4 {
 .weekview {
   position: absolute;
   min-width: 600px;
-  background-color: green;
   display: inline-flex;
   flex-wrap: nowrap;
   justify-content: space-evenly;
 }
 
 .dayheader {
-  background-color: lightgreen;
   overflow-x: hidden;
   text-overflow: ellipsis;
   text-align: center;
@@ -42,7 +40,6 @@ h4 {
 
 .dayview {
   width: calc(100vw / 7);
-  background-color: blue;
 }
 
 .onboarding-actions {

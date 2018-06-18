@@ -207,6 +207,7 @@ export default class App extends React.Component {
                 top: `${navbarHeight}px`,
                 height: `calc(100vh - ${navbarHeight}px)`,
               }}
+              theme={theme}
               language={language}
             />
             <Onboarding
