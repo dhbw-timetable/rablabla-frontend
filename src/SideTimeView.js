@@ -31,6 +31,7 @@ export default function SideTimeView(props) {
             className="sidetimesview-line"
             key={`line${i}`}
             style={{
+              backgroundColor: theme.palette.primary.dark,
               top: `calc(${(100 / lines) * i}% + 95px)`,
             }}
           />
