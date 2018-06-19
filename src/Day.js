@@ -7,10 +7,6 @@ export default class Day extends React.Component {
     super(props);
     this.state = {
     };
-    /*console.log('= = = = = = = = =');
-    console.log(props.dayEvents);
-    console.log(props.dayMoment.format());
-    console.log('= = = = = = = = =');*/
   }
 
   render() {
@@ -27,12 +23,11 @@ export default class Day extends React.Component {
       backgroundColor: window.innerHeight <= 450 ? theme.palette.primary.light : 'rgba(0,0,0,0)',
       height: '100%',
     };
-    console.log(dayMoment.format('DD.MM.YYYY'));
     return (<div className="dayview" style={dayviewStyle}>
       <h4 className="dayheader" style={dayheaderStyle}>{dayMoment.format('dd. DD. MM.')}</h4>
       <div className="daybody" style={daybodyStyle}>
-        {dayEvents.map((e) => {
-          return (<Event eventObj={e} theme={theme} />);
+        {dayEvents.map((e, i) => {
+          return (<Event eventObj={e} key={`event${i}`} theme={theme} />);
         })}
       </div>
     </div>);
