@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dotdotdot from 'react-dotdotdot';
+import moment from 'moment';
 
 export default class Event extends React.Component {
 
@@ -19,9 +20,21 @@ export default class Event extends React.Component {
     };
 
     return (<div className="event" style={eventStyle}>
-        <Dotdotdot className="event-time-wrapper" clamp={1}><p className="event-time" style={{ color: theme.palette.primary.contrastText }}>{eventObj.startDate} - {eventObj.endDate}</p></Dotdotdot>
-        <Dotdotdot clamp={2}><p className="event-title" style={{ color: theme.palette.primary.contrastText }}>{eventObj.title}</p></Dotdotdot>
-        <Dotdotdot className="event-description-wrapper" clamp={1}><p className="event-description" style={{ color: theme.palette.primary.contrastText }}>{eventObj.ressources}</p></Dotdotdot>
+        <Dotdotdot className="event-time-wrapper" clamp={1}>
+          <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
+            {moment(eventObj.startDate, 'HH:mm DD.MM.YYYY').format('HH:mm')} - {moment(eventObj.endDate, 'HH:mm DD.MM.YYYY').format('HH:mm')}
+          </p>
+        </Dotdotdot>
+        <Dotdotdot clamp={2}>
+          <p className="event-title" style={{ color: theme.palette.primary.contrastText }}>
+            {eventObj.title}
+          </p>
+        </Dotdotdot>
+        <Dotdotdot className="event-description-wrapper" clamp={1}>
+          <p className="event-description" style={{ color: theme.palette.primary.contrastText }}>
+            {eventObj.ressources}
+          </p>
+        </Dotdotdot>
     </div>);
   }
 }
