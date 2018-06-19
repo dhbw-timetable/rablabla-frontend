@@ -69,6 +69,7 @@ h4 {
 }
 
 .event {
+  overflow: hidden;
   left: 8px; // fake margin
   border-radius: 3px;
   padding: 8px;
@@ -165,6 +166,7 @@ h4 {
   }
 }
 
+
 @media (max-height: 450px) {
   #root {
     position: absolute;
@@ -185,7 +187,6 @@ h4 {
     display: none;
   }
 }
-
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

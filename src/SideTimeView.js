@@ -10,7 +10,7 @@ export default function SideTimeView(props) {
         className="sidetimesview-times-container"
         style={{
           backgroundColor: theme.palette.primary.light,
-          top: `${navbarHeight + 31}px`, // 64px navbar + 31px dayheader
+          top: `${navbarHeight}px`,
         }}
       >
         {Array(lines).fill().map((_, i) => {
@@ -20,7 +20,7 @@ export default function SideTimeView(props) {
                 key={`time${i}`}
                 style={{
                   color: theme.palette.primary.dark,
-                  top: `calc(${(100 / lines) * i}% - 6.5px)`,
+                  top: `calc(${(100 / lines) * i}% - 6.5px + 31px)`, // font-size/2 + dayheader
                   // top: `calc(((100vh - 31px) / ${lines}) * ${i} - 6.5px + 31px)`,
                 }}
               >{i + start}</span>

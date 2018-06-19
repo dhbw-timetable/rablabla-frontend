@@ -18,7 +18,6 @@ export default class Event extends React.Component {
       boxShadow: `1.5px 2px 5px 1px ${theme.palette.primary.dark}`,
       ...style,
     };
-
     return (<div className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>
           <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
@@ -31,7 +30,13 @@ export default class Event extends React.Component {
           </p>
         </Dotdotdot>
         <Dotdotdot className="event-description-wrapper" clamp={1}>
-          <p className="event-description" style={{ color: theme.palette.primary.contrastText }}>
+          <p
+            className="event-description"
+            style={{
+              display: window.innerHeight <= 350 ? 'none' : 'block',
+              color: theme.palette.primary.contrastText,
+            }}
+          >
             {eventObj.ressources}
           </p>
         </Dotdotdot>
