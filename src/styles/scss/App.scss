@@ -74,8 +74,8 @@ h4 {
   border-radius: 3px;
   padding: 8px;
   position: absolute;
-  top: calc((100% / 13) * 1); // calculated time: e.g 08:00
-  height: calc((100% / 13) * 4); // calculated duration e.g 4h
+  top: calc((100% / 13) * 1 + 2px); // calculated time: e.g 08:00 + 2px shadow correcture
+  height: calc((100% / 13) * 4 + 10px); // calculated duration e.g 4h + 10px whatever?
   width: calc(100vw / 7 - 2 * 8px);
 }
 
@@ -161,6 +161,26 @@ h4 {
     width: 150px;
   }
 }
+
+@media (max-height: 450px) {
+  #root {
+    position: absolute;
+    overflow-y: scroll;
+  }
+
+  .sidetimesview-times-container {
+    display: none;
+  }
+
+  .weekview {
+    left: 0;
+  }
+
+  .sidetimesview-line {
+    display: none;
+  }
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

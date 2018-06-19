@@ -32,7 +32,7 @@ export default class WeekView extends React.Component {
             <h4 className="dayheader" style={dayheaderStyle}>Mi. 13.</h4>
             <div className="daybody" style={daybodyStyle}>
               <div className="event" style={eventStyle}>
-                <Dotdotdot clamp={1}><p className="event-time" style={{ color: theme.palette.primary.contrastText }}>07:00 - 12:00</p></Dotdotdot>
+                <Dotdotdot clamp={1}><p className="event-time" style={{ color: theme.palette.primary.contrastText }}>08:00 - 12:00</p></Dotdotdot>
                 <Dotdotdot clamp={2}><p className="event-title" style={{ color: theme.palette.primary.contrastText }}>Very Long Lineare Algebra</p></Dotdotdot>
                 <Dotdotdot className="event-description-wrapper" clamp={1}><p className="event-description" style={{ color: theme.palette.primary.contrastText }}>Ein tolles Fach. Oskar Dunkeldich</p></Dotdotdot>
               </div>
