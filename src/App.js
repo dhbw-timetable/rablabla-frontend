@@ -48,7 +48,8 @@ export default class App extends React.Component {
     const themeString = window.localStorage.getItem('theme');
     const theme = themeString !== null ? this.getTheme(themeString) : darkTheme;
 
-    document.querySelector('body').style['background-color'] = theme.palette.primary.light;
+    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
+    document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
 
     this.state = {
       navbarHeight: 0,
@@ -104,7 +105,8 @@ export default class App extends React.Component {
     const theme = this.getTheme(themeString);
     window.localStorage.setItem('theme', themeString);
 
-    document.querySelector('body').style['background-color'] = theme.palette.primary.light;
+    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
+    document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
 
     this.setState({ theme });
   }
@@ -208,10 +210,12 @@ export default class App extends React.Component {
                 top: `${navbarHeight}px`,
                 height: `calc(100vh - ${navbarHeight}px)`,
               }}
+              displayDate={displayDate}
+              weekStartsOnMonday={weekStartsOnMonday}
               theme={theme}
               language={language}
             />
-            <SideTimeView theme={theme} />
+            <SideTimeView navbarHeight={navbarHeight} theme={theme} />
             <Onboarding
               language={language}
               open={onboardingOpen}

@@ -21,10 +21,9 @@ h4 {
 }
 
 .sidetimesview-times-container {
-  height: calc(100vh - 64px);
+  height: 100%;
   width: 25px;
   position: fixed;
-  top: 64px;
   padding-left: 5px;
   z-index: 10;
 }
@@ -74,8 +73,8 @@ h4 {
   border-radius: 3px;
   padding: 8px;
   position: absolute;
-  top: calc((100% / 13) * 1 + 2px); // calculated time: e.g 08:00 + 2px shadow correcture
-  height: calc((100% / 13) * 4 + 10px); // calculated duration e.g 4h + 10px whatever?
+  top: calc((100vh / 13) * 1 + 0px); // calculated time: e.g 08:00
+  height: calc((100vh / 13) * 4); // calculated duration e.g 4h + 10px whatever?
   width: calc(100vw / 7 - 2 * 8px);
 }
 
@@ -166,6 +165,8 @@ h4 {
   #root {
     position: absolute;
     overflow-y: scroll;
+    min-height: 450px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .sidetimesview-times-container {
