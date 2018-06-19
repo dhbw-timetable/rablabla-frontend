@@ -19,7 +19,7 @@ export default function SideTimeView(props) {
                 key={`time${i}`}
                 style={{
                   color: theme.palette.primary.dark,
-                  top: `calc(${(100 / lines) * i}% - 6.5px)`,
+                  top: `calc(((100vh - 31px) / ${lines}) * ${i} - 6.5px + 31px)`, // / ${lines}) * ${i})vh - 6.5px + 31px)
                 }}
               >{i + start}</span>
           );
@@ -32,7 +32,7 @@ export default function SideTimeView(props) {
             key={`line${i}`}
             style={{
               backgroundColor: theme.palette.primary.dark,
-              top: `calc(${(100 / lines) * i}% + 95px)`,
+              top: `calc(((100vh - 31px) / ${lines}) * ${i} + 64px + 31px)`,
             }}
           />
         );

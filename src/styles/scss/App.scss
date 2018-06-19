@@ -21,10 +21,10 @@ h4 {
 }
 
 .sidetimesview-times-container {
-  height: 100%;
+  height: calc(100vh - 64px);
   width: 25px;
   position: fixed;
-  top: 95px;
+  top: 64px;
   padding-left: 5px;
   z-index: 10;
 }
@@ -70,14 +70,13 @@ h4 {
 }
 
 .event {
-  color: white;
-  background-color: #273238;
+  left: 8px; // fake margin
   border-radius: 3px;
   padding: 8px;
   position: absolute;
   top: calc((100% / 13) * 1); // calculated time: e.g 08:00
   height: calc((100% / 13) * 4); // calculated duration e.g 4h
-  width: calc(100vw / 7);
+  width: calc(100vw / 7 - 2 * 8px);
 }
 
 .event-time {
@@ -95,9 +94,12 @@ h4 {
 .event-description {
   margin: 0;
   font-size: 14px;
+  font-weight: 100;
+}
+
+.event-description-wrapper {
   position: absolute;
   bottom: 8px; // padding correcture
-  font-weight: 100;
 }
 
 .dayview {
@@ -137,7 +139,7 @@ h4 {
 
 @media (max-width: 1550px) {
   .event {
-    width: 220px;
+    width: 204px;
   }
 
   .dayview {
@@ -152,7 +154,7 @@ h4 {
   }
 
   .event {
-    width: 150px;
+    width: 134px;
   }
 
   .dayview {
