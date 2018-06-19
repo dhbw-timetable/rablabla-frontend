@@ -32,4 +32,9 @@ export default {
   DATE_PICKER_TODAY: 'Today',
   DATE_PICKER_OK: 'OK',
   DATE_PICKER_CANCEL: 'Cancel',
+  LESSON_DETAILS: 'Event Details',
+  TITLE: 'Title',
+  START_DATE: 'Begin',
+  END_DATE: 'End',
+  RESSOURCES: 'Ressources',
 };

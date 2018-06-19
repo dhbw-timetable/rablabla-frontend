@@ -10,7 +10,7 @@ export default class Day extends React.Component {
   }
 
   render() {
-    const { theme, dayMoment, style, dayEvents } = this.props;
+    const { theme, dayMoment, style, dayEvents, onEventClick } = this.props;
     const dayviewStyle = {
       backgroundColor: theme.palette.primary.light,
       ...style,
@@ -27,7 +27,13 @@ export default class Day extends React.Component {
       <h4 className="dayheader" style={dayheaderStyle}>{dayMoment.format('dd. DD. MM.')}</h4>
       <div className="daybody" style={daybodyStyle}>
         {dayEvents.map((e, i) => {
-          return (<Event eventObj={e} key={`event${i}`} theme={theme} />);
+          return (
+            <Event
+              onClick={clickEvent => onEventClick(e, clickEvent)}
+              eventObj={e}
+              key={`event${i}`}
+              theme={theme}
+            />);
         })}
       </div>
     </div>);
@@ -38,6 +44,7 @@ Day.propTypes = {
   theme: PropTypes.object.isRequired,
   dayMoment: PropTypes.object.isRequired,
   dayIndex: PropTypes.number.isRequired,
+  onEventClick: PropTypes.func.isRequired,
   dayEvents: PropTypes.arrayOf(PropTypes.object),
   style: PropTypes.object,
 };

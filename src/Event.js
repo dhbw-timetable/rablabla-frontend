@@ -12,13 +12,13 @@ export default class Event extends React.Component {
   }
 
   render() {
-    const { style, theme, eventObj } = this.props;
+    const { style, theme, eventObj, onClick } = this.props;
     const eventStyle = {
       backgroundColor: theme.palette.primary.main,
       boxShadow: `1.5px 2px 5px 1px ${theme.palette.primary.dark}`,
       ...style,
     };
-    return (<div className="event" style={eventStyle}>
+    return (<div onClick={onClick} className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>
           <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
             {moment(eventObj.startDate, 'HH:mm DD.MM.YYYY').format('HH:mm')} - {moment(eventObj.endDate, 'HH:mm DD.MM.YYYY').format('HH:mm')}
@@ -48,6 +48,7 @@ Event.propTypes = {
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   eventObj: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 Event.defaultProps = {
