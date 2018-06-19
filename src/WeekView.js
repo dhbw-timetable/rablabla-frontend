@@ -11,12 +11,13 @@ export default class WeekView extends React.Component {
   }
 
   render() {
-    const { style, theme, displayDate, weekStartsOnMonday } = this.props;
+    const { style, theme, displayDate, weekStartsOnMonday, eventData } = this.props;
     return (
       <div className="weekview" style={style}>
         {Array(7).fill().map((_, i) => {
-          const dayMmt = (weekStartsOnMonday ? moment(displayDate).day(i + 1) : displayDate.day(i));
-          return (<Day key={`day${i}`} theme={theme} dayMoment={dayMmt} dayIndex={i} />);
+          const dayMmt = (weekStartsOnMonday ? moment(displayDate).day(i + 1)
+            : moment(displayDate).day(i));
+          return (<Day dayEvents={eventData[dayMmt.format('DD.MM.YYYY')]} key={`day${i}`} theme={theme} dayMoment={dayMmt} dayIndex={i} />);
         })}
       </div>
     );
@@ -27,6 +28,7 @@ WeekView.propTypes = {
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   displayDate: PropTypes.object.isRequired,
+  eventData: PropTypes.object.isRequired,
   weekStartsOnMonday: PropTypes.bool.isRequired,
 };
 

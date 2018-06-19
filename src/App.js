@@ -51,7 +51,23 @@ export default class App extends React.Component {
     document.querySelector('body').style['background-color'] = theme.palette.primary.main;
     document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
 
+    // TODO: Load event data into state
+
     this.state = {
+      eventData: {
+        '18.06.2018': [],
+        '19.06.2018': [],
+        '20.06.2018': [{
+          startDate: '08:30 01.08.2017',
+          endDate: '10:30 01.08.2017',
+          title: 'Klausur',
+          ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+        }],
+        '21.06.2018': [],
+        '22.06.2018': [],
+        '23.06.2018': [],
+        '24.06.2018': [],
+      },
       navbarHeight: 0,
       onboardingOpen,
       theme,
@@ -165,7 +181,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { displayDate, theme, preferencesOpen, weekStartsOnMonday,
+    const { eventData, displayDate, theme, preferencesOpen, weekStartsOnMonday,
       languageSetting, language, onboardingOpen, navbarHeight } = this.state;
     return (
       <React.Fragment>
@@ -213,6 +229,7 @@ export default class App extends React.Component {
               displayDate={displayDate}
               weekStartsOnMonday={weekStartsOnMonday}
               theme={theme}
+              eventData={eventData}
               language={language}
             />
             <SideTimeView navbarHeight={navbarHeight} theme={theme} />
