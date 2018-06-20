@@ -40,18 +40,14 @@ const sampleBackendResponse = {
 };
 
 export default function getWeekEvents(url, mmt, success, error) {
-  console.log(`${ajaxTarget}/events`);
-  console.log(`http://localhost:10010/events`);
-  $.get('http://localhost:10010/events', {
+  $.get(`${ajaxTarget}/events`, {
     url,
     startDate: mmt.format('YYYY-MM-DD'),
     endDate: mmt.format('YYYY-MM-DD'),
-  }).done((resp) => { success(prepareWeekEventData(sampleBackendResponse)); }).fail(error);
+  }).done((resp) => { success(prepareWeekEventData(resp)); }).fail(error);
 }
 
 function prepareWeekEventData(weekBackendData) {
-  console.log('weekBackendData');
-  console.log(weekBackendData);
   const stateWeekData = {};
   Object.keys(weekBackendData).forEach((weekKey) => {
     weekBackendData[weekKey].forEach((eventObj) => {

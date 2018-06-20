@@ -49,15 +49,17 @@ export default class App extends React.Component {
     document.querySelector('body').style['background-color'] = theme.palette.primary.main;
     document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
 
-    //  TODO: Load event data into state
-    const eventData = getWeekEvents(this.raplaLink, moment(), this.onGetDone, this.onGetFail);
+    const displayDate = moment('2017-07-24');
+
+    //  TODO: Load event data from localStorage into state and save it there
+    const eventData = getWeekEvents(this.raplaLink, displayDate, this.onGetDone, this.onGetFail);
 
     this.state = {
       eventData,
       navbarHeight: 0,
       onboardingOpen,
       theme,
-      displayDate: moment(),
+      displayDate,
       preferencesOpen: false,
       weekStartsOnMonday,
       languageSetting,
@@ -123,12 +125,12 @@ export default class App extends React.Component {
   }
 
   setDisplayDate = (displayDate) => {
-    // TODO: Fetch event data?
     this.setState({ displayDate });
+    this.doRefresh();
   }
 
   doRefresh = () => {
-    getWeekEvents(this.state.url, this.state.displayDate,
+    getWeekEvents(this.raplaLink, this.state.displayDate,
       this.onGetDone, this.onGetFail);
   }
 
@@ -155,8 +157,6 @@ export default class App extends React.Component {
   }
 
   onGetDone = (preparedData) => {
-    console.log('GET successful');
-    console.log(preparedData);
     this.setState({ eventData: preparedData });
   }
 
