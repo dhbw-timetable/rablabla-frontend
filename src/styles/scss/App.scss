@@ -44,7 +44,7 @@ h4 {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   left: 25px;
-  z-index: 0;
+  z-index: 6;
   opacity: 0.6;
 }
 
@@ -69,6 +69,7 @@ h4 {
 }
 
 .event {
+  z-index: 8;
   overflow: hidden;
   left: 8px; // fake margin
   border-radius: 3px;
@@ -112,7 +113,6 @@ h4 {
 
 .daybody {
   position: relative;
-  z-index: 5;
 }
 
 .onboarding-actions {
@@ -175,16 +175,8 @@ h4 {
     -webkit-overflow-scrolling: touch;
   }
 
-  .sidetimesview-times-container {
-    display: none;
-  }
-
   .weekview {
     left: 0;
-  }
-
-  .sidetimesview-line {
-    display: none;
   }
 }
 

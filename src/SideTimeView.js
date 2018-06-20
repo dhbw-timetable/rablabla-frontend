@@ -4,6 +4,28 @@ import PropTypes from 'prop-types';
 export default function SideTimeView(props) {
   const { start, end, theme, navbarHeight } = props;
   const lines = end - start + 1;
+
+  const styles = (document.documentElement.clientHeight || window.innerHeight) <= 450 ? {
+    container: {
+      display: 'none',
+    },
+    weekview: {
+      left: 0,
+    },
+    line: {
+      display: 'none',
+    },
+  } : {
+    container: {
+      display: 'block',
+    },
+    weekview: {
+      left: '30px',
+    },
+    line: {
+      display: 'block',
+    },
+  };
   return (
     <div>
       <div
@@ -11,6 +33,7 @@ export default function SideTimeView(props) {
         style={{
           backgroundColor: theme.palette.primary.light,
           top: `${navbarHeight}px`,
+          ...styles.container,
         }}
       >
         {Array(lines).fill().map((_, i) => {
@@ -21,7 +44,6 @@ export default function SideTimeView(props) {
                 style={{
                   color: theme.palette.primary.dark,
                   top: `calc(${(100 / lines) * i}% - 6.5px + 31px)`, // font-size/2 + dayheader
-                  // top: `calc(((100vh - 31px) / ${lines}) * ${i} - 6.5px + 31px)`,
                 }}
               >{i + start}</span>
           );
@@ -35,7 +57,7 @@ export default function SideTimeView(props) {
             style={{
               backgroundColor: theme.palette.primary.dark,
               top: `calc(${(100 / lines) * i}% + ${31 + navbarHeight}px)`,
-              // top: `calc(((100vh - 31px) / ${lines}) * ${i} + 64px + 31px)`,
+              ...styles.line,
             }}
           />
         );

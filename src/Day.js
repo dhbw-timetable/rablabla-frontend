@@ -20,7 +20,7 @@ export default class Day extends React.Component {
       color: theme.palette.primary.contrastText,
     };
     const daybodyStyle = {
-      backgroundColor: window.innerHeight <= 450 ? theme.palette.primary.light : 'rgba(0,0,0,0)',
+      backgroundColor: (document.documentElement.clientHeight || window.innerHeight) <= 450 ? theme.palette.primary.light : 'rgba(0,0,0,0)',
       height: '100%',
     };
     return (<div className="dayview" style={dayviewStyle}>
