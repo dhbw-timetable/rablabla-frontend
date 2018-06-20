@@ -3,10 +3,17 @@ import PropTypes from 'prop-types';
 import Dotdotdot from 'react-dotdotdot';
 
 export default class Event extends React.Component {
+  container = null;
+
   constructor(props) {
     super(props);
     this.state = {
+      height: 10,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ height: this.container.clientHeight });
   }
 
   render() {
@@ -21,7 +28,7 @@ export default class Event extends React.Component {
       top: `calc((100vh / ${end - start + 1}) * ${startValue})`,
       height: `calc((100vh / ${end - start + 1}) * ${durationValue})`,
     };
-    return (<div onClick={onClick} className="event" style={eventStyle}>
+    return (<div ref={el => this.container = el} onClick={onClick} className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>
           <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
             {eventObj.startMmt.format('HH:mm')} - {eventObj.endMmt.format('HH:mm')}
@@ -36,7 +43,7 @@ export default class Event extends React.Component {
           <p
             className="event-description"
             style={{
-              display: (document.documentElement.clientHeight || window.innerHeight) <= 350 ? 'none' : 'block',
+              display: (this.state.height) <= 108 ? 'none' : 'block',
               color: theme.palette.primary.contrastText,
             }}
           >

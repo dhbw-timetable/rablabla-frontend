@@ -26,7 +26,7 @@ const sampleBackendResponse = {
     },
     {
       startDate: '11:00 21.06.2018',
-      endDate: '13:00 21.06.2018',
+      endDate: '12:00 21.06.2018',
       title: 'Klausur wichtig',
       ressources: 'Hier könnte Ihre Werbung stehen.',
     },
