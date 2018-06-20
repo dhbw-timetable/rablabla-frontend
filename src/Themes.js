@@ -40,7 +40,7 @@ const lightTheme = createMuiTheme({
   palette: {
     primary: {
       main: '#f5f5f5',
-      light: '#ffffff',
+      light: '#f2f2f2',
       dark: '#c2c2c2',
       contrastText: '#000000',
     },
@@ -51,6 +51,29 @@ const lightTheme = createMuiTheme({
       contrastText: '#ffffff',
     },
     // error: will use the default color
+  },
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#c2c2c2',
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: '#000000',
+      },
+      selected: {
+        backgroundColor: '#ff7961',
+      },
+      current: {
+        color: '#f44336',
+      },
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#000000',
+      },
+    },
   },
 });
 
