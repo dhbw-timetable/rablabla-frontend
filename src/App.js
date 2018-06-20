@@ -36,7 +36,7 @@ export default class App extends React.Component {
     if (weekStartsOnMonday === null) {
       weekStartsOnMonday = true;
     } else {
-      weekStartsOnMonday = weekStartsOnMonday === true;
+      weekStartsOnMonday = weekStartsOnMonday === 'true';
     }
 
     // TODO: Set week starting day in moment js
