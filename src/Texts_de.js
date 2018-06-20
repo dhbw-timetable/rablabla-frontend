@@ -8,7 +8,7 @@ export default {
   TIMETABLE_CONNECTION_SAMPLE1: 'https://rapla.dhbw-stuttgart.de/rapla?key=12345abcdef',
   TIMETABLE_CONNECTION_DESCRIPTION_OR: 'oder',
   TIMETABLE_CONNECTION_SAMPLE2: 'https://rapla.dhbw-karlsruhe.de/rapla?page=calendar&user=x&file=inf4',
-  TIMETABLE_CONNECTION_LABEL: 'Rapla Timetable Link',
+  TIMETABLE_CONNECTION_LABEL: 'Rapla Stundenplan Link',
   TIMETABLE_CONNECTION_LABEL_VALID: '',
   TIMETABLE_CONNECTION_LABEL_INVALID: 'Ups, das sieht nicht nach einem gültigen Link aus...',
   DESIGN_THEME: 'Design',

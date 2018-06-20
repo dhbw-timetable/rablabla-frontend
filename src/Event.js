@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dotdotdot from 'react-dotdotdot';
-import moment from 'moment';
 
 export default class Event extends React.Component {
   constructor(props) {
@@ -12,10 +11,9 @@ export default class Event extends React.Component {
 
   render() {
     const { start, end, style, theme, eventObj, onClick } = this.props;
-    const startMmt = moment(eventObj.startDate, 'HH:mm DD.MM.YYYY');
-    const startValue = startMmt.hours() + startMmt.minutes() / 60 - start;
-    const endMmt = moment(eventObj.endDate, 'HH:mm DD.MM.YYYY');
-    const durationValue = (endMmt.hours() + endMmt.minutes() / 60 - start) - startValue;
+    const startValue = eventObj.startMmt.hours() + eventObj.startMmt.minutes() / 60 - start;
+    const durationValue = (eventObj.endMmt.hours() + eventObj.endMmt.minutes() / 60 - start)
+      - startValue;
     const eventStyle = {
       ...style,
       backgroundColor: theme.palette.primary.main,
@@ -26,7 +24,7 @@ export default class Event extends React.Component {
     return (<div onClick={onClick} className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>
           <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
-            {startMmt.format('HH:mm')} - {endMmt.format('HH:mm')}
+            {eventObj.startMmt.format('HH:mm')} - {eventObj.endMmt.format('HH:mm')}
           </p>
         </Dotdotdot>
         <Dotdotdot clamp={2}>

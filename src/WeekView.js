@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import Typography from '@material-ui/core/Typography';
 import Day from './Day';
 
 function Transition(props) {
@@ -48,15 +48,24 @@ export default class WeekView extends React.Component {
             {`${language.LESSON_DETAILS}: ${!displayEvent ? '' : displayEvent.title}`}
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              {`${language.START_DATE}: ${!displayEvent ? '' : displayEvent.startDate}`}
-            </DialogContentText>
-            <DialogContentText>
-              {`${language.END_DATE}: ${!displayEvent ? '' : displayEvent.endDate}`}
-            </DialogContentText>
-            <DialogContentText>
-              {`${language.RESSOURCES}: ${!displayEvent ? '' : displayEvent.ressources}`}
-            </DialogContentText>
+            <Typography variant="body2">
+              {language.START_DATE}:
+            </Typography>
+            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+              {!displayEvent ? '' : displayEvent.startDate}
+            </Typography>
+            <Typography variant="body2">
+              {language.END_DATE}:
+            </Typography>
+            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+              {!displayEvent ? '' : displayEvent.endDate}
+            </Typography>
+            <Typography variant="body2">
+              {language.RESSOURCES}:
+            </Typography>
+            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+              {!displayEvent ? '' : displayEvent.ressources.replace(/<[^>]*>/g, '')}
+            </Typography>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="secondary">
@@ -90,7 +99,7 @@ WeekView.propTypes = {
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   displayDate: PropTypes.object.isRequired,
-  eventData: PropTypes.object.isRequired,
+  eventData: PropTypes.object,
   weekStartsOnMonday: PropTypes.bool.isRequired,
   language: PropTypes.object.isRequired,
 };
@@ -99,4 +108,5 @@ WeekView.defaultProps = {
   start: 7,
   end: 19,
   style: {},
+  eventData: {},
 };

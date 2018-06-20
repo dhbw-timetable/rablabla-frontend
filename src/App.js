@@ -39,8 +39,6 @@ export default class App extends React.Component {
       weekStartsOnMonday = weekStartsOnMonday === 'true';
     }
 
-    // TODO: Set week starting day in moment js
-
     moment.locale(window.localStorage.getItem('mmtLocale') || 'de');
 
     const languageSetting = window.localStorage.getItem('language') || 'german';
@@ -51,58 +49,11 @@ export default class App extends React.Component {
     document.querySelector('body').style['background-color'] = theme.palette.primary.main;
     document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
 
-    // TODO: Load event data into state
+    //  TODO: Load event data into state
+    const eventData = getWeekEvents(this.raplaLink, moment(), this.onGetDone, this.onGetFail);
 
     this.state = {
-      eventData: {
-        '18.06.2018': [
-          {
-            startDate: '08:30 03.08.2017',
-            endDate: '10:30 03.08.2017',
-            title: 'Mathematik',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          },
-        ],
-        '19.06.2018': [
-          {
-            startDate: '08:30 01.08.2017',
-            endDate: '10:30 01.08.2017',
-            title: 'Sport',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          },
-          {
-            startDate: '11:00 16.09.2017',
-            endDate: '13:00 16.09.2017',
-            title: 'Religion',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          },
-        ],
-        '20.06.2018': [
-          {
-            startDate: '08:30 01.08.2017',
-            endDate: '10:30 01.08.2017',
-            title: 'Technik',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          },
-        ],
-        '21.06.2018': [
-          {
-            startDate: '11:00 16.09.2017',
-            endDate: '13:00 16.09.2017',
-            title: 'Informatik',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          },
-        ],
-        '22.06.2018': [
-          {
-            startDate: '11:00 16.09.2017',
-            endDate: '13:00 16.09.2017',
-            title: 'Wirtschaft',
-            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-          }],
-        '23.06.2018': [],
-        '24.06.2018': [],
-      },
+      eventData,
       navbarHeight: 0,
       onboardingOpen,
       theme,
@@ -203,12 +154,15 @@ export default class App extends React.Component {
     this.setState({ onboardingOpen: false });
   }
 
-  onGetDone = () => {
-
+  onGetDone = (preparedData) => {
+    console.log('GET successful');
+    console.log(preparedData);
+    this.setState({ eventData: preparedData });
   }
 
-  onGetFail = () => {
-
+  onGetFail = (error) => {
+    console.log('GET failed...');
+    console.log(error);
   }
 
   componentDidMount() {
