@@ -34,7 +34,7 @@ export default class WeekView extends React.Component {
   render() {
     const { displayEvent, detailsDialogOpen } = this.state;
     const { language, style, theme, displayDate, weekStartsOnMonday,
-      eventData } = this.props;
+      eventData, start, end } = this.props;
     return (
       <div className="weekview" style={style}>
         <Dialog
@@ -67,7 +67,17 @@ export default class WeekView extends React.Component {
         {Array(7).fill().map((_, i) => {
           const dayMmt = (weekStartsOnMonday ? moment(displayDate).day(i + 1)
             : moment(displayDate).day(i));
-          return (<Day onEventClick={this.handleEventClick} dayEvents={eventData[dayMmt.format('DD.MM.YYYY')]} key={`day${i}`} theme={theme} dayMoment={dayMmt} dayIndex={i} />);
+          return (
+            <Day
+              start={start}
+              end={end}
+              onEventClick={this.handleEventClick}
+              dayEvents={eventData[dayMmt.format('DD.MM.YYYY')]}
+              key={`day${i}`}
+              theme={theme}
+              dayMoment={dayMmt}
+              dayIndex={i}
+            />);
         })}
       </div>
     );
@@ -75,6 +85,8 @@ export default class WeekView extends React.Component {
 }
 
 WeekView.propTypes = {
+  start: PropTypes.number,
+  end: PropTypes.number,
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   displayDate: PropTypes.object.isRequired,
@@ -84,5 +96,7 @@ WeekView.propTypes = {
 };
 
 WeekView.defaultProps = {
+  start: 7,
+  end: 19,
   style: {},
 };

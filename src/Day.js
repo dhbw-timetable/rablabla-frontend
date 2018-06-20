@@ -10,7 +10,8 @@ export default class Day extends React.Component {
   }
 
   render() {
-    const { theme, dayMoment, style, dayEvents, onEventClick } = this.props;
+    const { theme, dayMoment, style, dayEvents, onEventClick,
+      start, end } = this.props;
     const dayviewStyle = {
       backgroundColor: theme.palette.primary.light,
       ...style,
@@ -29,6 +30,8 @@ export default class Day extends React.Component {
         {dayEvents.map((e, i) => {
           return (
             <Event
+              start={start}
+              end={end}
               onClick={clickEvent => onEventClick(e, clickEvent)}
               eventObj={e}
               key={`event${i}`}
@@ -41,6 +44,8 @@ export default class Day extends React.Component {
 }
 
 Day.propTypes = {
+  start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired,
   dayMoment: PropTypes.object.isRequired,
   dayIndex: PropTypes.number.isRequired,

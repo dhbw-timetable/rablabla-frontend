@@ -55,16 +55,51 @@ export default class App extends React.Component {
 
     this.state = {
       eventData: {
-        '18.06.2018': [],
-        '19.06.2018': [],
-        '20.06.2018': [{
-          startDate: '08:30 01.08.2017',
-          endDate: '10:30 01.08.2017',
-          title: 'Klausur',
-          ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
-        }],
-        '21.06.2018': [],
-        '22.06.2018': [],
+        '18.06.2018': [
+          {
+            startDate: '08:30 03.08.2017',
+            endDate: '10:30 03.08.2017',
+            title: 'Mathematik',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          },
+        ],
+        '19.06.2018': [
+          {
+            startDate: '08:30 01.08.2017',
+            endDate: '10:30 01.08.2017',
+            title: 'Sport',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          },
+          {
+            startDate: '11:00 16.09.2017',
+            endDate: '13:00 16.09.2017',
+            title: 'Religion',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          },
+        ],
+        '20.06.2018': [
+          {
+            startDate: '08:30 01.08.2017',
+            endDate: '10:30 01.08.2017',
+            title: 'Technik',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          },
+        ],
+        '21.06.2018': [
+          {
+            startDate: '11:00 16.09.2017',
+            endDate: '13:00 16.09.2017',
+            title: 'Informatik',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          },
+        ],
+        '22.06.2018': [
+          {
+            startDate: '11:00 16.09.2017',
+            endDate: '13:00 16.09.2017',
+            title: 'Wirtschaft',
+            ressources: 'STG-TINF16C,RB41-0.19<small> (Mo 24.07.17  11:00, Di 25.07.17  11:00)</small>,RB41-0.11<small> (Fr 28.07.17  08:30, Mi 26.07.17  08:30)</small>,RB41-0.10<small> (Do 27.07.17  11:00)</small>',
+          }],
         '23.06.2018': [],
         '24.06.2018': [],
       },
