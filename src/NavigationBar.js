@@ -99,7 +99,7 @@ export default class NavigationBar extends React.Component {
             >
               <MenuItem onClick={() => {
                 this.handleMenuClose();
-                doRefresh();
+                doRefresh(true);
               }}
               >{language.REFRESH}</MenuItem>
               <MenuItem onClick={() => { this.githubAnchor.click(); }}>

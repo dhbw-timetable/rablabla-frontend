@@ -79,14 +79,16 @@ export default class App extends React.Component {
       language: languageSetting === 'german' ? germanLang : englishLang,
     };
 
-    if (!onboardingOpen) {
-      this.doRefresh();
-    }
+    window.addEventListener('resize', this.onResize);
 
-    window.addEventListener('resize', () => {
-      this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
-    });
+    if (!onboardingOpen) {
+      this.doRefresh(false);
+    }
   }
+
+  onResize = () => {
+    this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+  };
 
   setWeekStartsOnMonday = (weekStartsOnMonday) => {
     window.localStorage.setItem('weekStartsOnMonday', weekStartsOnMonday ? 'true' : 'false');
@@ -143,11 +145,13 @@ export default class App extends React.Component {
 
   setDisplayDate = (displayDate) => {
     this.setState({ displayDate });
-    this.doRefresh();
+    this.doRefresh(true);
   }
 
-  doRefresh = () => {
-    this.setState({ loading: true });
+  doRefresh = (isMounted) => {
+    if (isMounted) {
+      this.setState({ loading: true });
+    }
     getWeekEvents(this.raplaLink, this.state.displayDate,
       this.onGetDone, this.onGetFail);
   }
@@ -160,7 +164,7 @@ export default class App extends React.Component {
     this.raplaLink = link;
     window.localStorage.setItem('raplaLink', link);
 
-    this.doRefresh();
+    this.doRefresh(true);
     this.setState({ preferencesOpen: false });
   }
 
@@ -172,7 +176,7 @@ export default class App extends React.Component {
     this.raplaLink = link;
     window.localStorage.setItem('raplaLink', link);
     this.setState({ onboardingOpen: false });
-    this.doRefresh();
+    this.doRefresh(true);
   }
 
   onGetDone = (preparedData) => {
@@ -192,15 +196,18 @@ export default class App extends React.Component {
   }
 
   onGetFail = (error) => {
-    console.log('GET failed...');
-    alert(`Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection! ${JSON.stringify(error)}`);
-    console.log(error);
+    console.error('Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection!');
+    console.error(error);
 
     this.setState({ loading: false });
   }
 
   componentDidMount() {
     this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
   }
 
   render() {

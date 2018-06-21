@@ -2,7 +2,6 @@
   "name": "rablabla-frontend",
   "version": "0.0.0",
   "private": true,
-  "homepage": "https://dhbw-timetable.github.io/rablabla-frontend/",
   "dependencies": {
     "@material-ui/core": "^1.2.0",
     "@material-ui/icons": "^1.1.0",

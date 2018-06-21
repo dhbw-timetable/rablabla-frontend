@@ -4,7 +4,7 @@ import moment from 'moment';
 const publicDomain = 'to-be-defined.com';
 const productionBackend = '2b-defined.de';
 const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productionBackend : 'http://localhost:10010';
-const sampleBackendResponse = {
+/* const sampleBackendResponse = {
   '18.06.2018': [
     {
       startDate: '08:30 18.06.2018',
@@ -37,7 +37,7 @@ const sampleBackendResponse = {
       ressources: 'Hier könnte Ihre Werbung stehen.',
     },
   ],
-};
+}; */
 
 export default function getWeekEvents(url, mmt, success, error) {
   $.get(`${ajaxTarget}/events`, {
