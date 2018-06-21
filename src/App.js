@@ -22,6 +22,7 @@ export default class App extends React.Component {
   raplaLink = null;
   datePickerInput = null;
   navbar = null;
+  mounted = false;
 
   constructor(props) {
     super(props);
@@ -51,10 +52,21 @@ export default class App extends React.Component {
 
     const displayDate = moment('2017-07-24');
 
-    //  TODO: Load event data from localStorage into state and save it there
-    const eventData = getWeekEvents(this.raplaLink, displayDate, this.onGetDone, this.onGetFail);
+    let eventData = JSON.parse(window.localStorage.getItem('eventData'));
+    if (eventData) {
+      // parse moment js objects
+      Object.keys(eventData).forEach((weekKey) => {
+        eventData[weekKey].forEach((eventObj) => {
+          eventObj.startMmt = moment(eventObj.startMmt);
+          eventObj.endMmt = moment(eventObj.endMmt);
+        });
+      });
+    } else {
+      eventData = {};
+    }
 
     this.state = {
+      loading: true,
       eventData,
       navbarHeight: 0,
       onboardingOpen,
@@ -65,6 +77,8 @@ export default class App extends React.Component {
       languageSetting,
       language: languageSetting === 'german' ? germanLang : englishLang,
     };
+
+    this.doRefresh();
 
     window.addEventListener('resize', () => {
       this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
@@ -157,11 +171,24 @@ export default class App extends React.Component {
   }
 
   onGetDone = (preparedData) => {
-    this.setState({ eventData: preparedData });
+    const eventData = Object.keys(this.state.eventData).filter((weekKey) => {
+      return Math.abs(moment(weekKey, 'DD.MM.YYYY').diff(moment(), 'days')) <= 42;
+    }).reduce((obj, key) => {
+      obj[key] = this.state.eventData[key];
+      return obj;
+    }, {});
+
+    // merge eventData of the last/next 42 days with new preparedData
+    Object.assign(eventData, preparedData);
+
+    window.localStorage.setItem('eventData', JSON.stringify(eventData));
+
+    this.setState({ eventData });
   }
 
   onGetFail = (error) => {
     console.log('GET failed...');
+    alert(`Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection! ${JSON.stringify(error)}`);
     console.log(error);
   }
 

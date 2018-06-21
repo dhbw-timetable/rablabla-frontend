@@ -42,9 +42,17 @@ const sampleBackendResponse = {
 export default function getWeekEvents(url, mmt, success, error) {
   $.get(`${ajaxTarget}/events`, {
     url,
-    startDate: mmt.format('YYYY-MM-DD'),
-    endDate: mmt.format('YYYY-MM-DD'),
-  }).done((resp) => { success(prepareWeekEventData(resp)); }).fail(error);
+    // pre/postfetch events of +/-30 days
+    startDate: moment(mmt).subtract(30, 'days').format('YYYY-MM-DD'),
+    endDate: moment(mmt).add(30, 'days').format('YYYY-MM-DD'),
+  }).done((resp) => {
+    // XXX sometimtes it gets rapla ENOTFOUND -.-
+    if (resp.errno) {
+      error(resp);
+    } else {
+      success(prepareWeekEventData(resp));
+    }
+  }).fail(error);
 }
 
 function prepareWeekEventData(weekBackendData) {

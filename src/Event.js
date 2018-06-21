@@ -8,12 +8,21 @@ export default class Event extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: 10,
+      height: this.container ? this.container.clientHeight : 10,
     };
   }
 
+  onResize = () => {
+    this.setState({ height: this.container ? this.container.clientHeight : 10 });
+  };
+
   componentDidMount() {
     this.setState({ height: this.container.clientHeight });
+    window.addEventListener('resize', this.onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
   }
 
   render() {
@@ -43,7 +52,7 @@ export default class Event extends React.Component {
           <p
             className="event-description"
             style={{
-              display: (this.state.height) <= 108 ? 'none' : 'block',
+              display: (this.state.height) <= 100 ? 'none' : 'block',
               color: theme.palette.primary.contrastText,
             }}
           >
