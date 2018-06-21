@@ -4,6 +4,7 @@ import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { DatePicker } from 'material-ui-pickers';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
@@ -66,8 +67,8 @@ export default class App extends React.Component {
     }
 
     this.state = {
-      loading: true,
       eventData,
+      loading: !onboardingOpen,
       navbarHeight: 0,
       onboardingOpen,
       theme,
@@ -78,7 +79,9 @@ export default class App extends React.Component {
       language: languageSetting === 'german' ? germanLang : englishLang,
     };
 
-    this.doRefresh();
+    if (!onboardingOpen) {
+      this.doRefresh();
+    }
 
     window.addEventListener('resize', () => {
       this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
@@ -144,6 +147,7 @@ export default class App extends React.Component {
   }
 
   doRefresh = () => {
+    this.setState({ loading: true });
     getWeekEvents(this.raplaLink, this.state.displayDate,
       this.onGetDone, this.onGetFail);
   }
@@ -168,6 +172,7 @@ export default class App extends React.Component {
     this.raplaLink = link;
     window.localStorage.setItem('raplaLink', link);
     this.setState({ onboardingOpen: false });
+    this.doRefresh();
   }
 
   onGetDone = (preparedData) => {
@@ -183,13 +188,15 @@ export default class App extends React.Component {
 
     window.localStorage.setItem('eventData', JSON.stringify(eventData));
 
-    this.setState({ eventData });
+    this.setState({ eventData, loading: false });
   }
 
   onGetFail = (error) => {
     console.log('GET failed...');
     alert(`Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection! ${JSON.stringify(error)}`);
     console.log(error);
+
+    this.setState({ loading: false });
   }
 
   componentDidMount() {
@@ -198,7 +205,7 @@ export default class App extends React.Component {
 
   render() {
     const { eventData, displayDate, theme, preferencesOpen, weekStartsOnMonday,
-      languageSetting, language, onboardingOpen, navbarHeight } = this.state;
+      languageSetting, language, onboardingOpen, navbarHeight, loading } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -255,6 +262,10 @@ export default class App extends React.Component {
               applyOnboarding={this.applyOnboarding}
               toggleLanguage={this.toggleLanguage}
             />
+            {loading ?
+              <LinearProgress style={{ top: `${navbarHeight}px` }} className="progressbar" color="secondary" />
+              : <div />
+            }
           </MuiPickersUtilsProvider>
         </MuiThemeProvider>
       </React.Fragment>
