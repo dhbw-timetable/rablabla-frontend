@@ -29,11 +29,12 @@
     "start-js": "react-scripts start",
     "start": "./node_modules/.bin/npm-run-all -p sass start-js",
     "build-js": "react-scripts build",
-    "build": "./node_modules/.bin/npm-run-all -p sass build-js",
+    "build": "./node_modules/.bin/npm-run-all -p sass-production build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css",
-    "sass:build": "sass — update src/styles/scss:src/styles/css",
+    "sass-production": "sass --update src/styles/scss:src/styles/css",
+    "sass:build": "sass — update src/styles/scss:src/styles/css",
     "deploy": "gh-pages -d build"
   }
 }
