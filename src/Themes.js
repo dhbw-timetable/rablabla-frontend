@@ -3,6 +3,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
+    background: {
+      paper: '#263238',
+      default: '#263238',
+    },
     primary: {
       main: '#263238',
       light: '#4f5b62',
@@ -16,6 +20,29 @@ const darkTheme = createMuiTheme({
       contrastText: '#ffffff',
     },
     // error: will use the default color
+  },
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#263238',
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: '#ffffff',
+      },
+      selected: {
+        backgroundColor: '#f57c00',
+      },
+      current: {
+        color: '#bb4d00',
+      },
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#f57c00',
+      },
+    },
   },
 });
 

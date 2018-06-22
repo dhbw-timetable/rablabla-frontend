@@ -2,7 +2,7 @@ import $ from 'jquery';
 import moment from 'moment';
 
 const publicDomain = 'rablabla.m320trololol.com';
-const productionBackend = 'http://wailord:9001';
+const productionBackend = 'https://wailord:9001';
 const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productionBackend : 'http://localhost:10010';
 /* const sampleBackendResponse = {
   '18.06.2018': [
