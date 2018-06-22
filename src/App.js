@@ -68,7 +68,7 @@ export default class App extends React.Component {
 
     this.state = {
       eventData,
-      loading: !onboardingOpen,
+      loadingTasks: onboardingOpen ? 0 : 1,
       navbarHeight: 0,
       onboardingOpen,
       theme,
@@ -150,7 +150,7 @@ export default class App extends React.Component {
 
   doRefresh = (isMounted) => {
     if (isMounted) {
-      this.setState({ loading: true });
+      this.setState({ loadingTasks: this.state.loadingTasks + 1 });
     }
     getWeekEvents(this.raplaLink, this.state.displayDate,
       this.onGetDone, this.onGetFail);
@@ -192,14 +192,17 @@ export default class App extends React.Component {
 
     window.localStorage.setItem('eventData', JSON.stringify(eventData));
 
-    this.setState({ eventData, loading: false });
+    this.setState({ eventData,
+      loadingTasks: this.state.loadingTasks <= 1 ?
+      0 : this.state.loadingTasks - 1 });
   }
 
   onGetFail = (error) => {
     console.error('Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection!');
     console.error(error);
 
-    this.setState({ loading: false });
+    this.setState({ loadingTasks: this.state.loadingTasks <= 1 ?
+    0 : this.state.loadingTasks - 1 });
   }
 
   componentDidMount() {
@@ -212,7 +215,7 @@ export default class App extends React.Component {
 
   render() {
     const { eventData, displayDate, theme, preferencesOpen, weekStartsOnMonday,
-      languageSetting, language, onboardingOpen, navbarHeight, loading } = this.state;
+      languageSetting, language, onboardingOpen, navbarHeight, loadingTasks } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -269,7 +272,7 @@ export default class App extends React.Component {
               applyOnboarding={this.applyOnboarding}
               toggleLanguage={this.toggleLanguage}
             />
-            {loading ?
+            {loadingTasks > 0 ?
               <LinearProgress style={{ top: `${navbarHeight}px` }} className="progressbar" color="secondary" />
               : <div />
             }
