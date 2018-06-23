@@ -20,9 +20,13 @@ export default class Event extends React.Component {
     window.addEventListener('resize', this.onResize);
   }
 
+  onUpdate = () => {
+    this.setState({ height: this.container.clientHeight });
+  }
+
   componentDidUpdate() {
     if (this.state.height !== this.container.clientHeight) {
-      this.setState({ height: this.container.clientHeight });
+      this.onUpdate();
     }
   }
 

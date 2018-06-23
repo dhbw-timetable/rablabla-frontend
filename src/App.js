@@ -227,9 +227,13 @@ export default class App extends React.Component {
     0 : this.state.loadingTasks - 1 });
   }
 
-  componentDidMount() {
+  onMount = () => {
     const navbar = document.querySelector('header.navbar');
     this.setState({ navbarHeight: navbar ? navbar.clientHeight : 0 });
+  };
+
+  componentDidMount() {
+    this.onMount();
   }
 
   componentWillUnmount() {
