@@ -41,19 +41,19 @@ export default class Event extends React.Component {
       - startValue;
     const eventStyle = {
       ...style,
-      backgroundColor: theme.palette.primary.main,
-      boxShadow: `1.5px 2px 5px 1px ${theme.palette.primary.dark}`,
+      backgroundColor: theme.special.event.backgroundColor,
+      boxShadow: `1.5px 2px 5px 1px ${theme.special.event.boxShadow}`,
       top: `calc((100vh / ${end - start + 1}) * ${startValue})`,
       height: `calc((100vh / ${end - start + 1}) * ${durationValue})`,
     };
     return (<div ref={el => this.container = el} onClick={onClick} className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>
-          <p className="event-time" style={{ color: theme.palette.primary.contrastText }}>
+          <p className="event-time" style={{ color: theme.special.event.fontColor }}>
             {eventObj.startMmt.format('HH:mm')} - {eventObj.endMmt.format('HH:mm')}
           </p>
         </Dotdotdot>
         <Dotdotdot clamp={2}>
-          <p className="event-title" style={{ color: theme.palette.primary.contrastText }}>
+          <p className="event-title" style={{ color: theme.special.event.fontColor }}>
             {eventObj.title}
           </p>
         </Dotdotdot>
@@ -62,7 +62,7 @@ export default class Event extends React.Component {
             className="event-description"
             style={{
               display: (this.state.height) <= 100 ? 'none' : 'block',
-              color: theme.palette.primary.contrastText,
+              color: theme.special.event.fontColor,
             }}
           >
             {eventObj.ressources}

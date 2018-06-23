@@ -31,7 +31,7 @@ export default function SideTimeView(props) {
       <div
         className="sidetimesview-times-container"
         style={{
-          backgroundColor: theme.palette.primary.light,
+          backgroundColor: theme.special.week.sidetimesview.backgroundColor,
           top: `${navbarHeight}px`,
           ...styles.container,
         }}
@@ -42,7 +42,7 @@ export default function SideTimeView(props) {
                 className="sidetimesview-time"
                 key={`time${i}`}
                 style={{
-                  color: theme.palette.primary.dark,
+                  color: theme.special.week.sidetimesview.color,
                   top: `calc(${(100 / lines) * i}% - 6.5px + 31px)`, // font-size/2 + dayheader
                 }}
               >{i + start}</span>
@@ -55,7 +55,7 @@ export default function SideTimeView(props) {
             className="sidetimesview-line"
             key={`line${i}`}
             style={{
-              backgroundColor: theme.palette.primary.dark,
+              backgroundColor: theme.special.week.sidetimesview.color,
               top: `calc(${(100 / lines) * i}% + ${31 + navbarHeight}px)`,
               ...styles.line,
             }}

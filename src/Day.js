@@ -15,16 +15,16 @@ export default class Day extends React.Component {
       start, end, dayIndex } = this.props;
     const isCurrent = id === moment().format('DD.MM.YYYY');
     const dayviewStyle = {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.special.week.dayview.backgroundColor,
       ...style,
     };
     const dayheaderStyle = {
-      backgroundColor: theme.palette.primary.light,
+      backgroundColor: theme.special.week.dayheader.backgroundColor,
       color: isCurrent ? theme.palette.secondary.main : theme.palette.primary.contrastText,
       fontWeight: isCurrent ? 400 : 200,
     };
     const daybodyStyle = {
-      backgroundColor: (document.documentElement.clientHeight || window.innerHeight) <= 450 ? theme.palette.primary.light : 'rgba(0,0,0,0)',
+      backgroundColor: (document.documentElement.clientHeight || window.innerHeight) <= 450 ? theme.special.week.daybody.backgroundColor : 'rgba(0,0,0,0)',
       height: '100%',
     };
     return (<div id={id} className="dayview" style={dayviewStyle}>
