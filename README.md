@@ -1,5 +1,7 @@
 # rablabla-frontend
 
+Release: [![Build Status](https://travis-ci.org/dhbw-timetable/rablabla-frontend.svg?branch=master)](https://travis-ci.org/dhbw-timetable/rablabla-frontend)
+
 This is the frontend part of rablabla. A free parsing and timetable management system for rapla based timetables.
 
 As Create-React-App let you suggest:
