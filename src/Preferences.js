@@ -36,7 +36,6 @@ export default class Preferences extends React.Component {
   };
 
   handleClose = () => {
-    window.removeEventListener('keypress', this.handleKeypress);
     this.props.hidePreferences(this.linkRef.value);
   };
 

@@ -15,6 +15,7 @@ import SideTimeView from './SideTimeView';
 import Preferences from './Preferences';
 import WeekView from './WeekView';
 import Onboarding from './Onboarding';
+import ReleaseNotes from './ReleaseNotes';
 import getWeekEvents from './BackendConnection';
 import germanLang from './Texts_de';
 import englishLang from './Texts_en';
@@ -65,11 +66,21 @@ export default class App extends React.Component {
       eventData = {};
     }
 
+    let releaseNotesTimestamp = window.localStorage.getItem('releaseNotes');
+    if (releaseNotesTimestamp === null) {
+      if (!onboardingOpen) {
+        releaseNotesTimestamp = moment('1970', 'YYYY');
+      }
+    } else {
+      releaseNotesTimestamp = moment(releaseNotesTimestamp);
+    }
+
     this.state = {
       eventData,
       loadingTasks: onboardingOpen ? 0 : 1,
       navbarHeight: 0,
       onboardingOpen,
+      releaseNotesOpen: !onboardingOpen && releaseNotesTimestamp.diff(moment('2018-01-01')) < 0,
       theme,
       displayDate,
       preferencesOpen: false,
@@ -181,8 +192,13 @@ export default class App extends React.Component {
   applyOnboarding = (link) => {
     this.raplaLink = link;
     window.localStorage.setItem('raplaLink', link);
-    this.setState({ onboardingOpen: false });
+    this.setState({ onboardingOpen: false, releaseNotesOpen: true });
     this.doRefresh(true);
+  }
+
+  closeReleaseNotes = () => {
+    window.localStorage.setItem('releaseNotes', moment().format('YYYY-MM-DD'));
+    this.setState({ releaseNotesOpen: false });
   }
 
   onGetDone = (preparedData) => {
@@ -222,7 +238,8 @@ export default class App extends React.Component {
 
   render() {
     const { eventData, displayDate, theme, preferencesOpen, weekStartsOnMonday,
-      languageSetting, language, onboardingOpen, navbarHeight, loadingTasks } = this.state;
+      languageSetting, language, onboardingOpen, navbarHeight, loadingTasks,
+      releaseNotesOpen } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -278,6 +295,11 @@ export default class App extends React.Component {
               open={onboardingOpen}
               applyOnboarding={this.applyOnboarding}
               toggleLanguage={this.toggleLanguage}
+            />
+            <ReleaseNotes
+              language={language}
+              open={releaseNotesOpen}
+              closeReleaseNotes={this.closeReleaseNotes}
             />
             {loadingTasks > 0 ?
               <LinearProgress style={{ top: `${navbarHeight}px` }} className="progressbar" color="secondary" />

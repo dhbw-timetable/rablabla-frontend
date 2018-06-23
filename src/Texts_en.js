@@ -37,4 +37,13 @@ export default {
   START_DATE: 'Begin',
   END_DATE: 'End',
   RESSOURCES: 'Ressources',
+  RELEASE_NOTES: 'Release Notes',
+  RELEASE_NOTE_THEMES_TITLE: 'Design Themes',
+  RELEASE_NOTE_THEMES_DESCRIPTION: 'We are happy to show you the power of the dark side! Introducing the new default look of Rablabla we also added the option the change the Rablabla Design in the preferences. They are also something new by the way. Choose whether you want it delight, dark or exotic!',
+  RELEASE_NOTE_PROGRESS_TITLE: 'Progress Bar',
+  RELEASE_NOTE_PROGRESS_DESCRIPTION: 'The new loading bar is indicating the current background loadings of your calendar. And it looks awesome.',
+  RELEASE_NOTE_PREFERENCES_TITLE: 'Preferences',
+  RELEASE_NOTE_PREFERENCES_DESCRIPTION: 'You now have the opportunity to change the properties of your calendar! Starting with your link, over the language (english and german available), the day where the week starts and of course: the theme.',
+  RELEASE_NOTE_WEEKBUTTONS_TITLE: 'Week Switching Buttons',
+  RELEASE_NOTE_WEEKBUTTONS_DESCRIPTION: 'We know you want it. Here you have it. Switch to the next or previous week with just one single click.',
 };
