@@ -51,7 +51,7 @@ export default class App extends React.Component {
 
     this.updateBackgrounds(theme);
 
-    const displayDate = moment('2017-07-24');
+    const displayDate = moment();
 
     let eventData = JSON.parse(window.localStorage.getItem('eventData'));
     if (eventData) {
@@ -230,6 +230,11 @@ export default class App extends React.Component {
   onMount = () => {
     const navbar = document.querySelector('header.navbar');
     this.setState({ navbarHeight: navbar ? navbar.clientHeight : 0 });
+
+    const day = document.getElementById(moment().format('DD.MM.YYYY'));
+    if (day) {
+      day.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   componentDidMount() {

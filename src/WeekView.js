@@ -78,6 +78,7 @@ export default class WeekView extends React.Component {
             : moment(displayDate).day(i));
           return (
             <Day
+              id={dayMmt.format('DD.MM.YYYY')}
               start={start}
               end={end}
               onEventClick={this.handleEventClick}
