@@ -177,8 +177,32 @@ export default class App extends React.Component {
     this.setState({ preferencesOpen: true });
   }
 
+  getParams = (query) => {
+    if (!query) {
+      return { };
+    }
+
+    return (/^[?#]/.test(query) ? query.slice(1) : query)
+      .split('&')
+      .reduce((params, param) => {
+        const [key, value] = param.split('=');
+        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+        return params;
+      }, { });
+  };
+
+  fixLink = (link) => {
+    const params = this.getParams(link.substring(link.indexOf('?'), link.length));
+    const baseUrl = link.substring(0, link.indexOf('?') + 1);
+    const rest = Object.keys(params)
+      .filter(param => param.match(/key|file|user|page/))
+      .map(param => `${param}=${params[param]}`)
+      .join('&');
+    return `${baseUrl}${rest}`;
+  };
+
   hidePreferences = (link) => {
-    this.raplaLink = link;
+    this.raplaLink = this.fixLink(link);
     window.localStorage.setItem('raplaLink', link);
 
     this.doRefresh(true);
@@ -190,7 +214,7 @@ export default class App extends React.Component {
   }
 
   applyOnboarding = (link) => {
-    this.raplaLink = link;
+    this.raplaLink = this.fixLink(link);
     window.localStorage.setItem('raplaLink', link);
     this.setState({ onboardingOpen: false, releaseNotesOpen: true });
     this.doRefresh(true);
