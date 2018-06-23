@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import Event from './Event';
+import CurrentTimeLine from './CurrentTimeLine';
 
 export default class Day extends React.Component {
   constructor(props) {
@@ -41,6 +42,12 @@ export default class Day extends React.Component {
               theme={theme}
             />);
         })}
+        { isCurrent ?
+          <CurrentTimeLine
+            theme={theme}
+            start={start}
+            end={end}
+          /> : <div />}
       </div>
     </div>);
   }

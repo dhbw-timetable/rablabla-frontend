@@ -116,6 +116,26 @@ const alternativeTheme = createMuiTheme({
       fontColor: '#ffffff',
     },
   },
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#2f57d6',
+      },
+    },
+    MuiPickersDay: {
+      selected: {
+        backgroundColor: '#f73996',
+      },
+      current: {
+        color: '#f73996',
+      },
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#f73996',
+      },
+    },
+  },
 });
 
 const lightTheme = createMuiTheme({
@@ -168,9 +188,6 @@ const lightTheme = createMuiTheme({
       },
     },
     MuiPickersDay: {
-      day: {
-        color: '#000000',
-      },
       selected: {
         backgroundColor: '#ff7961',
       },
@@ -180,7 +197,7 @@ const lightTheme = createMuiTheme({
     },
     MuiPickersModal: {
       dialogAction: {
-        color: '#000000',
+        color: '#f44336',
       },
     },
   },

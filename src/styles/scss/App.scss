@@ -20,6 +20,15 @@ h4 {
 .navbar {
 }
 
+.currtimeline {
+  position: absolute;
+  width: 102%;
+  height: 1.7px;
+  opacity: 1;
+  z-index: 20;
+  left: -1%;
+}
+
 .progressbar {
   height: 2px !important;
   width: 100vw;
