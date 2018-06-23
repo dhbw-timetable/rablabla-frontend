@@ -27,7 +27,6 @@ export default class Day extends React.Component {
       backgroundColor: (document.documentElement.clientHeight || window.innerHeight) <= 450 ? theme.palette.primary.light : 'rgba(0,0,0,0)',
       height: '100%',
     };
-    console.log(`${id} === ${moment().format('DD.MM.YYYY')} ? ${isCurrent}`);
     return (<div id={id} className="dayview" style={dayviewStyle}>
       <h4 className="dayheader" style={dayheaderStyle}>{dayMoment.format('dd. DD. MM.')}</h4>
       <div className="daybody" style={daybodyStyle}>
