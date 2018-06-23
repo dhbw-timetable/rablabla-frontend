@@ -8,7 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
-import { lightTheme, darkTheme, alternativeTheme } from './Themes';
+import { lightTheme, darkTheme, alternativeTheme } from './styles/Themes';
 import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
 import SideTimeView from './SideTimeView';
@@ -17,8 +17,8 @@ import WeekView from './WeekView';
 import Onboarding from './Onboarding';
 import ReleaseNotes from './ReleaseNotes';
 import getWeekEvents from './BackendConnection';
-import germanLang from './Texts_de';
-import englishLang from './Texts_en';
+import germanLang from './lang/Texts_de';
+import englishLang from './lang/Texts_en';
 
 export default class App extends React.Component {
   raplaLink = null;
@@ -100,8 +100,8 @@ export default class App extends React.Component {
     const bodyEl = document.querySelector('body');
     const rootEl = document.querySelector('#root');
 
-    if (bodyEl) bodyEl.style['background-color'] = theme.palette.primary.main;
-    if (rootEl) rootEl.style['background-color'] = theme.palette.primary.light;
+    if (bodyEl) bodyEl.style['background-color'] = theme.special.body.backgroundColor;
+    if (rootEl) rootEl.style['background-color'] = theme.special.root.backgroundColor;
   }
 
   onResize = () => {
