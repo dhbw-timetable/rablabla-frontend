@@ -32,7 +32,6 @@ export default class Event extends React.Component {
 
   render() {
     const { start, end, style, theme, eventObj, onClick } = this.props;
-    console.log(`Rendering ${eventObj.title} with ${this.state.height}`);
     const startValue = eventObj.startMmt.hours() + eventObj.startMmt.minutes() / 60 - start;
     const durationValue = (eventObj.endMmt.hours() + eventObj.endMmt.minutes() / 60 - start)
       - startValue;
