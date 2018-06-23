@@ -31,6 +31,10 @@ const darkTheme = createMuiTheme({
       dayview: {
         backgroundColor: '#4f5b62',
       },
+      sidetimesview: {
+        backgroundColor: '#4f5b62',
+        color: '#263238',
+      },
       dayheader: {
         backgroundColor: '#4f5b62',
       },
@@ -138,13 +142,17 @@ const lightTheme = createMuiTheme({
     },
     week: {
       dayview: {
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#fff',
+      },
+      sidetimesview: {
+        backgroundColor: '#fff',
+        color: '#b2b2b2',
       },
       dayheader: {
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#fff',
       },
       daybody: {
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#fff',
       },
     },
     event: {
