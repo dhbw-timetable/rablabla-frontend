@@ -21,7 +21,6 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
-    "jasmine": "^3.1.0",
     "npm-run-all": "^4.1.2",
     "react-scripts": "^1.1.4"
   },
@@ -30,7 +29,7 @@
     "start": "./node_modules/.bin/npm-run-all -p sass start-js",
     "build-js": "react-scripts build",
     "build": "./node_modules/.bin/npm-run-all -p sass-production build-js",
-    "test": "react-scripts test --env=jsdom",
+    "test": "CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css",
     "sass-production": "sass --update src/styles/scss:src/styles/css",

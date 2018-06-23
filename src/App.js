@@ -48,8 +48,7 @@ export default class App extends React.Component {
     const themeString = window.localStorage.getItem('theme');
     const theme = themeString !== null ? this.getTheme(themeString) : darkTheme;
 
-    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
-    document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
+    this.updateBackgrounds(theme);
 
     const displayDate = moment('2017-07-24');
 
@@ -86,8 +85,17 @@ export default class App extends React.Component {
     }
   }
 
+  updateBackgrounds = (theme) => {
+    const bodyEl = document.querySelector('body');
+    const rootEl = document.querySelector('#root');
+
+    if (bodyEl) bodyEl.style['background-color'] = theme.palette.primary.main;
+    if (rootEl) rootEl.style['background-color'] = theme.palette.primary.light;
+  }
+
   onResize = () => {
-    this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+    const navbar = document.querySelector('header.navbar');
+    this.setState({ navbarHeight: navbar ? navbar.clientHeight : 0 });
   };
 
   setWeekStartsOnMonday = (weekStartsOnMonday) => {
@@ -128,9 +136,7 @@ export default class App extends React.Component {
     const theme = this.getTheme(themeString);
     window.localStorage.setItem('theme', themeString);
 
-    document.querySelector('body').style['background-color'] = theme.palette.primary.main;
-    document.querySelector('#root').style['background-color'] = theme.palette.primary.light;
-
+    this.updateBackgrounds(theme);
     this.setState({ theme });
   }
 
@@ -206,7 +212,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ navbarHeight: document.querySelector('header.navbar').clientHeight });
+    const navbar = document.querySelector('header.navbar');
+    this.setState({ navbarHeight: navbar ? navbar.clientHeight : 0 });
   }
 
   componentWillUnmount() {
