@@ -34,6 +34,6 @@
     "sass": "sass --watch src/styles/scss:src/styles/css",
     "sass-production": "sass --update src/styles/scss:src/styles/css",
     "sass:build": "sass — update src/styles/scss:src/styles/css",
-    "deploy": "git pull && npm run build && docker stop rablabla-frontend && docker build -t rablabla-frontend . && docker run -p 9003:5000 -d rablabla-frontend:latest"
+    "deploy": "git pull && npm run build && docker stop rablabla-frontend && docker build -t rablabla-frontend . && docker run -p 9003:5000 -d rablabla-frontend:latest --name rablabla-frontend"
   }
 }
