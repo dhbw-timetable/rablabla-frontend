@@ -4,7 +4,7 @@ import moment from 'moment';
 const publicDomain = 'rablabla.m320trololol.com';
 const productionBackend = 'https://backendrablabla.m320trololol.com';
 const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productionBackend : 'http://localhost:10010';
-/* const sampleBackendResponse = {
+const sampleBackendResponse = {
   '18.06.2018': [
     {
       startDate: '08:30 18.06.2018',
@@ -37,7 +37,7 @@ const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productio
       ressources: 'Hier könnte Ihre Werbung stehen.',
     },
   ],
-}; */
+};
 
 export default function getWeekEvents(url, mmt, success, error) {
   $.get(`${ajaxTarget}/events`, {
@@ -50,7 +50,7 @@ export default function getWeekEvents(url, mmt, success, error) {
     if (resp.errno) {
       error(resp);
     } else {
-      success(prepareWeekEventData(resp));
+      success(prepareWeekEventData(sampleBackendResponse));
     }
   }).fail(error);
 }
@@ -75,5 +75,69 @@ function prepareWeekEventData(weekBackendData) {
   return stateWeekData;
 }
 
-function fixCollisions() {
+function getMinuteValue(mmt) {
+  return mmt.hours() * 60 + mmt.minutes();
+}
+
+// check if there's a collision between the events a and b
+const intersects = (a, b) => {
+  const startMinA = getMinuteValue(a.startMmt);
+  const endMinA = getMinuteValue(a.endMmt);
+  const startMinB = getMinuteValue(b.startMmt);
+  const endMinB = getMinuteValue(b.endMmt);
+
+  return (startMinA <= startMinB && endMinA >= endMinB) // a contains(equals) b
+    || (startMinA >= startMinB && endMinA <= endMinB) // b contains(equals) a
+    || (startMinA < startMinB && endMinA < endMinB && endMinA > startMinB) // a intersects b
+    || (startMinA > startMinB && endMinA > endMinB && startMinA < endMinB) // b intersects a
+  ;
+};
+
+// checks if the target event intersects any of the dayAgenda (except itself)
+const intersectsAny = (targetEvent, dayAgenda) => {
+  return dayAgenda.filter(evnt => evnt !== targetEvent && intersects(targetEvent, evnt)).length > 0;
+};
+
+function fixCollisions(stateWeekData) {
+  Object.keys(stateWeekData).forEach((weekKey) => {
+    const dailyEvents = [[], [], [], [], [], [], []];
+
+    const events = stateWeekData[weekKey];
+
+    events.forEach(el => dailyEvents[el.startMmt.day()].push(el));
+
+    // for each day in week
+    dailyEvents.forEach((dayAgenda) => {
+      // a stack of columns
+      const stacks = [[]];
+
+      // for each event of this day
+      dayAgenda.forEach((evnt) => {
+        let i = 0, finish = false;
+        while (!finish) {
+          // if there'd be an intersection on this stack
+          if (!intersectsAny(evnt, stacks[i])) {
+            stacks[i].push(evnt);
+            finish = true;
+          } else {
+            i++;
+            // open up a new column
+            if (stacks.length === i) {
+              stacks.push([evnt]);
+              finish = true;
+            }
+          }
+        }
+      });
+
+      // assign the column values
+      stacks.forEach((colLevel, i) => {
+        colLevel.forEach((el) => {
+          el.col = i;
+          el.maxCol = stacks.length;
+          el.intersections = dayAgenda.filter(evnt => evnt !== el && intersects(el, evnt)).length;
+        });
+      });
+    });
+  });
 }
