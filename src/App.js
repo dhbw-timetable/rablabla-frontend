@@ -26,27 +26,37 @@ export default class App extends React.Component {
   navbar = null;
   mounted = false;
 
+
   constructor(props) {
     super(props);
 
+    const queryIndex = window.location.href.indexOf('?');
+    let urlPrefs = {};
+    if (queryIndex !== -1) {
+      urlPrefs = this.getParams(window.location.href.substring(queryIndex,
+         window.location.href.length));
+    }
+    console.log(urlPrefs);
+
     let onboardingOpen = false;
-    this.raplaLink = window.localStorage.getItem('raplaLink');
+    this.raplaLink = urlPrefs.url || window.localStorage.getItem('raplaLink');
     if (this.raplaLink === null) {
       onboardingOpen = true;
     }
 
-    let weekStartsOnMonday = window.localStorage.getItem('weekStartsOnMonday');
+    let weekStartsOnMonday = urlPrefs.wsomonday || window.localStorage.getItem('weekStartsOnMonday');
     if (weekStartsOnMonday === null) {
       weekStartsOnMonday = true;
     } else {
       weekStartsOnMonday = weekStartsOnMonday === 'true';
     }
 
-    moment.locale(window.localStorage.getItem('mmtLocale') || 'de');
+    moment.locale(urlPrefs.lang || window.localStorage.getItem('mmtLocale') || 'de');
 
-    const languageSetting = window.localStorage.getItem('language') || 'german';
+    const languageSetting = urlPrefs.lang ? (urlPrefs.lang === 'de' ? 'german' : 'english')
+      : window.localStorage.getItem('language') || 'german';
 
-    const themeString = window.localStorage.getItem('theme');
+    const themeString = urlPrefs.theme || window.localStorage.getItem('theme');
     const theme = themeString !== null ? this.getTheme(themeString) : darkTheme;
 
     this.updateBackgrounds(theme);
@@ -66,7 +76,8 @@ export default class App extends React.Component {
       eventData = {};
     }
 
-    let releaseNotesTimestamp = window.localStorage.getItem('releaseNotes');
+    let releaseNotesTimestamp = urlPrefs.mute ? moment()
+      : window.localStorage.getItem('releaseNotes');
     if (releaseNotesTimestamp === null) {
       if (!onboardingOpen) {
         releaseNotesTimestamp = moment('1970', 'YYYY');
