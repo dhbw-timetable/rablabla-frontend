@@ -39,12 +39,15 @@ export default class Event extends React.Component {
     const startValue = eventObj.startMmt.hours() + eventObj.startMmt.minutes() / 60 - start;
     const durationValue = (eventObj.endMmt.hours() + eventObj.endMmt.minutes() / 60 - start)
       - startValue;
+
     const eventStyle = {
       ...style,
       backgroundColor: theme.special.event.backgroundColor,
       boxShadow: `1.5px 2px 5px 1px ${theme.special.event.boxShadow}`,
       top: `calc((100vh / ${end - start + 1}) * ${startValue})`,
       height: `calc((100vh / ${end - start + 1}) * ${durationValue})`,
+      left: `${95 / eventObj.maxCol * eventObj.col + 5}%`,
+      width: eventObj.intersections > 0 ? `${95 / eventObj.maxCol}%` : '95%',
     };
     return (<div ref={el => this.container = el} onClick={onClick} className="event" style={eventStyle}>
         <Dotdotdot className="event-time-wrapper" clamp={1}>

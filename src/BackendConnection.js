@@ -25,6 +25,12 @@ const sampleBackendResponse = {
       ressources: 'Hier könnte Ihre Werbung stehen.',
     },
     {
+      startDate: '10:00 20.06.2018',
+      endDate: '14:00 20.06.2018',
+      title: 'Klausur Apfel',
+      ressources: 'Hier könnte Ihre Werbung stehen.',
+    },
+    {
       startDate: '11:00 21.06.2018',
       endDate: '12:00 21.06.2018',
       title: 'Klausur wichtig',
@@ -50,7 +56,7 @@ export default function getWeekEvents(url, mmt, success, error) {
     if (resp.errno) {
       error(resp);
     } else {
-      success(prepareWeekEventData(sampleBackendResponse));
+      success(prepareWeekEventData(sampleBackendResponse /*XXX resp XXX*/));
     }
   }).fail(error);
 }
