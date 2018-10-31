@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import moment from 'moment';
 
-const publicDomain = 'rablabla.m320trololol.com';
-const productionBackend = 'https://backendrablabla.m320trololol.com';
+const publicDomain = 'rablabla.hobbytes.de';
+const productionBackend = 'https://rablabla-backend.hobbytes.de';
 const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productionBackend : 'http://localhost:10010';
 const sampleBackendResponse = {
   '18.06.2018': [
