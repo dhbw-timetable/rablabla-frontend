@@ -56,7 +56,7 @@ export default function getWeekEvents(url, mmt, success, error) {
     if (resp.errno) {
       error(resp);
     } else {
-      success(prepareWeekEventData(sampleBackendResponse /*XXX resp XXX*/));
+      success(prepareWeekEventData(resp));
     }
   }).fail(error);
 }

@@ -61,9 +61,11 @@ export default class App extends React.Component {
 
     this.updateBackgrounds(theme);
 
-    const displayDate = moment('2017-07-24');
+    const displayDate = moment();
 
     let eventData = JSON.parse(window.localStorage.getItem('eventData'));
+    console.log(eventData);
+
     if (eventData) {
       // parse moment js objects
       Object.keys(eventData).forEach((weekKey) => {
