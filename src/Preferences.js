@@ -17,8 +17,7 @@ export default class Preferences extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
 
     if (props.open) {
       window.addEventListener('keypress', this.handleKeypress);
@@ -96,6 +95,7 @@ export default class Preferences extends React.Component {
             >
               <MenuItem value="dark">{language.DESIGN_THEME_DARK}</MenuItem>
               <MenuItem value="light">{language.DESIGN_THEME_LIGHT}</MenuItem>
+              <MenuItem value="classic">{language.DESIGN_THEME_CLASSIC}</MenuItem>
               <MenuItem value="alternative">{language.DESIGN_THEME_ALTERNATIVE}</MenuItem>
             </Select>
             <Typography

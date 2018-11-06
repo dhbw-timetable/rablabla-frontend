@@ -16,6 +16,7 @@ export default {
   DESIGN_THEME_DARK: 'Dark',
   DESIGN_THEME_LIGHT: 'Light',
   DESIGN_THEME_ALTERNATIVE: 'Alternative',
+  DESIGN_THEME_CLASSIC: 'Classic',
   WEEK_STARTING_DAY: 'Week Starting Day',
   WEEK_STARTING_DAY_DESCRIPTION: 'Check if your week starts on monday!',
   LANGUAGE: 'Language',
