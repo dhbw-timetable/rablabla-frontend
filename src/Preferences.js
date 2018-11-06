@@ -135,6 +135,9 @@ export default class Preferences extends React.Component {
               <MenuItem value="german">Deutsch</MenuItem>
               <MenuItem value="english">English</MenuItem>
             </Select>
+            <DialogContentText className="version-content">
+              {language.VERSION}
+            </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="secondary">
