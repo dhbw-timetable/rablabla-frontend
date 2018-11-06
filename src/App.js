@@ -8,7 +8,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import moment from 'moment';
 import 'moment/locale/de';
 import 'moment/locale/en-gb';
-import { lightTheme, darkTheme, alternativeTheme } from './styles/Themes';
+import { lightTheme, darkTheme, alternativeTheme, classicTheme } from './styles/Themes';
 import StatusBar from './StatusBar';
 import NavigationBar from './NavigationBar';
 import SideTimeView from './SideTimeView';
@@ -158,6 +158,9 @@ export default class App extends React.Component {
     if (themeString === 'dark') {
       return darkTheme;
     }
+    if (themeString === 'classic') {
+      return classicTheme;
+    }
     return themeString === 'light' ? lightTheme : alternativeTheme;
   };
 
@@ -175,6 +178,9 @@ export default class App extends React.Component {
     }
     if (theme === lightTheme) {
       return 'light';
+    }
+    if (theme === classicTheme) {
+      return 'classic'
     }
     return 'alternative';
   }

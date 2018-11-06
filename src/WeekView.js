@@ -96,8 +96,8 @@ export default class WeekView extends React.Component {
 }
 
 WeekView.propTypes = {
-  start: PropTypes.number,
-  end: PropTypes.number,
+  start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
   style: PropTypes.object,
   theme: PropTypes.object.isRequired,
   displayDate: PropTypes.object.isRequired,
@@ -107,8 +107,6 @@ WeekView.propTypes = {
 };
 
 WeekView.defaultProps = {
-  // start: 7,
-  // end: 20,
   style: {},
   eventData: {},
 };

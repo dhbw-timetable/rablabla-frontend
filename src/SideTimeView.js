@@ -70,12 +70,7 @@ export default function SideTimeView(props) {
 
 SideTimeView.propTypes = {
   navbarHeight: PropTypes.number.isRequired,
-  start: PropTypes.number,
-  end: PropTypes.number,
+  start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
   theme: PropTypes.object.isRequired,
-};
-
-SideTimeView.defaultProps = {
-  // start: 7,
-  // end: 20,
 };

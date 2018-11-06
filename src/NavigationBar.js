@@ -70,7 +70,7 @@ export default class NavigationBar extends React.Component {
     }
 
     return (
-      <div >
+      <div>
         <AppBar className="navbar">
           <Toolbar>
             {titleComponent}

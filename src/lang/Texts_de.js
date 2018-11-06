@@ -1,5 +1,6 @@
 export default {
   APP_NAME: 'Rablabla',
+  VERSION: 'v0.0.3',
   REFRESH: 'Aktualisieren',
   GITHUB: 'GitHub',
   PREFERENCES: 'Einstellungen',
@@ -16,6 +17,7 @@ export default {
   DESIGN_THEME_DARK: 'Dunkel',
   DESIGN_THEME_LIGHT: 'Hell',
   DESIGN_THEME_ALTERNATIVE: 'Alternativ',
+  DESIGN_THEME_CLASSIC: 'Klassisch',
   WEEK_STARTING_DAY: 'Erster Tag der Woche',
   WEEK_STARTING_DAY_DESCRIPTION: 'Mach dein Häkchen, wenn bei dir die Woche am Montag beginnt!',
   LANGUAGE: 'Sprache',

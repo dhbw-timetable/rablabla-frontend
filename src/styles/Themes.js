@@ -39,6 +39,10 @@ const darkTheme = createMuiTheme({
         color: '#f57c00',
       },
       dayheader: {
+        color: {
+          primary: '#ffffff',
+          secondary: '#f57c00',
+        },
         backgroundColor: '#4f5b62',
       },
       daybody: {
@@ -110,6 +114,10 @@ const alternativeTheme = createMuiTheme({
         color: '#f73996',
       },
       dayheader: {
+        color: {
+          primary: '#000000',
+          secondary: '#f73996',
+        },
         backgroundColor: '#ffffff',
       },
       daybody: {
@@ -178,6 +186,10 @@ const lightTheme = createMuiTheme({
         color: '#8b8b8b',
       },
       dayheader: {
+        color: {
+          primary: '#000000',
+          secondary: '#f5f5f5',
+        },
         backgroundColor: '#fff',
       },
       daybody: {
@@ -212,4 +224,76 @@ const lightTheme = createMuiTheme({
   },
 });
 
-export { lightTheme, darkTheme, alternativeTheme };
+const classicTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#f44336',
+      light: '#ff7961',
+      dark: '#ba000d',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#ffa726',
+      light: '#ffd95b',
+      dark: '#ffa726',
+      contrastText: '#ffffff',
+    },
+  },
+  special: {
+    body: {
+      backgroundColor: '#c2c2c2',
+    },
+    root: {
+      backgroundColor: '#f2f2f2',
+    },
+    week: {
+      dayview: {
+        backgroundColor: '#fff',
+      },
+      sidetimesview: {
+        backgroundColor: '#fff',
+        color: '#b2b2b2',
+      },
+      timeline: {
+        color: '#ffa726',
+      },
+      dayheader: {
+        color: {
+          primary: '#000000',
+          secondary: '#ffa726',
+        },
+        backgroundColor: '#fff',
+      },
+      daybody: {
+        backgroundColor: '#fff',
+      },
+    },
+    event: {
+      backgroundColor: '#f44336',
+      boxShadow: '#c2c2c2',
+      fontColor: '#ffffff',
+    },
+  },
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#f44336',
+      },
+    },
+    MuiPickersDay: {
+      selected: {
+        backgroundColor: '#ff7961',
+      },
+      current: {
+        color: '#f44336',
+      },
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#f44336',
+      },
+    },
+  },
+});
+
+export { lightTheme, darkTheme, alternativeTheme, classicTheme };

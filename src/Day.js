@@ -21,7 +21,8 @@ export default class Day extends React.Component {
     };
     const dayheaderStyle = {
       backgroundColor: theme.special.week.dayheader.backgroundColor,
-      color: isCurrent ? theme.palette.secondary.main : theme.palette.primary.contrastText,
+      color: isCurrent
+        ? theme.special.week.dayheader.color.secondary : theme.special.week.dayheader.color.primary,
       fontWeight: isCurrent ? 400 : 200,
     };
     const daybodyStyle = {
