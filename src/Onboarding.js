@@ -42,7 +42,7 @@ export default class Onboarding extends React.Component {
   };
 
   render() {
-    const { language } = this.props;
+    const { language, theme } = this.props;
     return (
       <div>
         <Dialog
@@ -92,7 +92,7 @@ export default class Onboarding extends React.Component {
             <DialogContentText>
               {language.LEGAL_DESCRIPTION1}
               <a
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: 'none', color: theme.palette.primary.main }}
                 href={language.LEGAL_GFONTS_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -102,7 +102,7 @@ export default class Onboarding extends React.Component {
               <br /><br />
               {language.LEGAL_DESCRIPTION2}
             </DialogContentText>
-           </DialogContent>
+          </DialogContent>
           <DialogActions classes={{ root: 'onboarding-actions' }}>
             <Button
               onClick={this.props.toggleLanguage}
@@ -125,6 +125,7 @@ export default class Onboarding extends React.Component {
 }
 
 Onboarding.propTypes = {
+  theme: PropTypes.object.isRequired,
   language: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   applyOnboarding: PropTypes.func.isRequired,

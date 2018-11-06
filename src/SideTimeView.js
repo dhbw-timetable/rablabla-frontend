@@ -45,7 +45,9 @@ export default function SideTimeView(props) {
                   color: theme.special.week.sidetimesview.color,
                   top: `calc(${(100 / lines) * i}% - 6.5px + 31px)`, // font-size/2 + dayheader
                 }}
-              >{i + start}</span>
+              >
+                {i + start}
+              </span>
           );
         })}
       </div>
@@ -74,6 +76,6 @@ SideTimeView.propTypes = {
 };
 
 SideTimeView.defaultProps = {
-  start: 7,
-  end: 19,
+  // start: 7,
+  // end: 20,
 };

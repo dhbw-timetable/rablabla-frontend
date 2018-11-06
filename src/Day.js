@@ -28,28 +28,32 @@ export default class Day extends React.Component {
       backgroundColor: (document.documentElement.clientHeight || window.innerHeight) <= 450 ? theme.special.week.daybody.backgroundColor : 'rgba(0,0,0,0)',
       height: '100%',
     };
-    return (<div id={id} className="dayview" style={dayviewStyle}>
-      <h4 className="dayheader" style={dayheaderStyle}>{dayMoment.format('dd. DD. MM.')}</h4>
-      <div className="daybody" style={daybodyStyle}>
-        {dayEvents.map((e, i) => {
-          return (
-            <Event
-              start={start}
-              end={end}
-              onClick={clickEvent => onEventClick(e, clickEvent)}
-              eventObj={e}
-              key={`day${dayIndex}_event${i}`}
-              theme={theme}
-            />);
-        })}
-        { isCurrent ?
-          <CurrentTimeLine
-            theme={theme}
-            start={start}
-            end={end}
-          /> : <div />}
-      </div>
-    </div>);
+
+    return (
+      <div id={id} className="dayview" style={dayviewStyle}>
+        <h4 className="dayheader" style={dayheaderStyle}>{dayMoment.format('dd. DD. MM.')}</h4>
+        <div className="daybody" style={daybodyStyle}>
+          {dayEvents.map((e, i) => {
+            return (
+              <Event
+                start={start}
+                end={end}
+                onClick={clickEvent => onEventClick(e, clickEvent)}
+                eventObj={e}
+                key={`day${dayIndex}_event${i}`}
+                theme={theme}
+              />);
+          })}
+          { isCurrent
+            ? (
+              <CurrentTimeLine
+                theme={theme}
+                start={start}
+                end={end}
+              />
+            ) : <div />}
+        </div>
+      </div>);
   }
 }
 
