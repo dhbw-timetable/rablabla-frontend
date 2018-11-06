@@ -4,46 +4,6 @@ import moment from 'moment';
 const publicDomain = 'rablabla.hobbytes.de';
 const productionBackend = 'https://rablabla-backend.hobbytes.de';
 const ajaxTarget = window.location.href.indexOf(publicDomain) !== -1 ? productionBackend : 'http://localhost:10010';
-const sampleBackendResponse = {
-  '18.06.2018': [
-    {
-      startDate: '08:30 18.06.2018',
-      endDate: '10:30 18.06.2018',
-      title: 'Klausur murmel',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-    {
-      startDate: '08:30 19.06.2018',
-      endDate: '10:30 19.06.2018',
-      title: 'Klausur holz',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-    {
-      startDate: '11:00 20.06.2018',
-      endDate: '13:00 20.06.2018',
-      title: 'Klausur Banane',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-    {
-      startDate: '10:00 20.06.2018',
-      endDate: '14:00 20.06.2018',
-      title: 'Klausur Apfel',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-    {
-      startDate: '11:00 21.06.2018',
-      endDate: '12:00 21.06.2018',
-      title: 'Klausur wichtig',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-    {
-      startDate: '11:00 22.06.2018',
-      endDate: '13:00 22.06.2018',
-      title: 'Klausur toll',
-      ressources: 'Hier könnte Ihre Werbung stehen.',
-    },
-  ],
-};
 
 export default function getWeekEvents(url, mmt, success, error) {
   $.get(`${ajaxTarget}/events`, {

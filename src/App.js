@@ -21,11 +21,14 @@ import germanLang from './lang/Texts_de';
 import englishLang from './lang/Texts_en';
 
 export default class App extends React.Component {
-  raplaLink = null;
-  datePickerInput = null;
-  navbar = null;
-  mounted = false;
 
+  raplaLink = null;
+
+  datePickerInput = null;
+
+  navbar = null;
+
+  mounted = false;
 
   constructor(props) {
     super(props);
@@ -34,7 +37,7 @@ export default class App extends React.Component {
     let urlPrefs = {};
     if (queryIndex !== -1) {
       urlPrefs = this.getParams(window.location.href.substring(queryIndex,
-         window.location.href.length));
+        window.location.href.length));
     }
     console.log(urlPrefs);
 
@@ -100,6 +103,8 @@ export default class App extends React.Component {
       weekStartsOnMonday,
       languageSetting,
       language: languageSetting === 'german' ? germanLang : englishLang,
+      startHour: 7,
+      endHour: 20,
     };
 
     window.addEventListener('resize', this.onResize);
@@ -167,7 +172,8 @@ export default class App extends React.Component {
   getThemeString = (theme) => {
     if (theme === darkTheme) {
       return 'dark';
-    } else if (theme === lightTheme) {
+    }
+    if (theme === lightTheme) {
       return 'light';
     }
     return 'alternative';
@@ -252,16 +258,16 @@ export default class App extends React.Component {
     window.localStorage.setItem('eventData', JSON.stringify(eventData));
 
     this.setState({ eventData,
-      loadingTasks: this.state.loadingTasks <= 1 ?
-      0 : this.state.loadingTasks - 1 });
+      loadingTasks: this.state.loadingTasks <= 1
+        ? 0 : this.state.loadingTasks - 1 });
   }
 
   onGetFail = (error) => {
     console.error('Ouuups a wild error occured. You can try to continue using the page but we do recommend to reload to page and check your internet and timetable connection!');
     console.error(error);
 
-    this.setState({ loadingTasks: this.state.loadingTasks <= 1 ?
-    0 : this.state.loadingTasks - 1 });
+    this.setState({ loadingTasks: this.state.loadingTasks <= 1
+      ? 0 : this.state.loadingTasks - 1 });
   }
 
   onMount = () => {
@@ -285,7 +291,7 @@ export default class App extends React.Component {
   render() {
     const { eventData, displayDate, theme, preferencesOpen, weekStartsOnMonday,
       languageSetting, language, onboardingOpen, navbarHeight, loadingTasks,
-      releaseNotesOpen } = this.state;
+      releaseNotesOpen, startHour, endHour } = this.state;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -323,6 +329,8 @@ export default class App extends React.Component {
               setWeekStartsOnMonday={this.setWeekStartsOnMonday}
               raplaLink={this.raplaLink}
               hidePreferences={this.hidePreferences}
+              startHour={startHour}
+              endHour={endHour}
             />
             <WeekView
               style={{
@@ -334,9 +342,17 @@ export default class App extends React.Component {
               theme={theme}
               eventData={eventData}
               language={language}
+              start={startHour}
+              end={endHour}
             />
-            <SideTimeView navbarHeight={navbarHeight} theme={theme} />
+            <SideTimeView
+              navbarHeight={navbarHeight}
+              start={startHour}
+              end={endHour}
+              theme={theme}
+            />
             <Onboarding
+              theme={theme}
               language={language}
               open={onboardingOpen}
               applyOnboarding={this.applyOnboarding}
@@ -347,8 +363,8 @@ export default class App extends React.Component {
               open={releaseNotesOpen}
               closeReleaseNotes={this.closeReleaseNotes}
             />
-            {loadingTasks > 0 ?
-              <LinearProgress style={{ top: `${navbarHeight}px` }} className="progressbar" color="secondary" />
+            {loadingTasks > 0
+              ? <LinearProgress style={{ top: `${navbarHeight}px` }} className="progressbar" color="secondary" />
               : <div />
             }
           </MuiPickersUtilsProvider>

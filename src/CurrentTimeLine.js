@@ -27,13 +27,14 @@ export default class CurrentTimeLine extends React.Component {
     const { start, end, style, theme } = this.props;
     const value = this.state.now.hours() + this.state.now.minutes() / 60 - start;
     const top = `calc((100vh / ${end - start + 1}) * ${value})`;
+
     return (
       <div
         className="currtimeline"
         style={{
           ...style,
           top,
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.special.week.timeline.color,
         }}
       />
     );

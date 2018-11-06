@@ -15,6 +15,7 @@ function Transition(props) {
 }
 
 export default class WeekView extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -51,19 +52,19 @@ export default class WeekView extends React.Component {
             <Typography variant="body2">
               {language.START_DATE}:
             </Typography>
-            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+            <Typography variant="body1" style={{ marginBottom: '5px' }}>
               {!displayEvent ? '' : displayEvent.startDate}
             </Typography>
             <Typography variant="body2">
               {language.END_DATE}:
             </Typography>
-            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+            <Typography variant="body1" style={{ marginBottom: '5px' }}>
               {!displayEvent ? '' : displayEvent.endDate}
             </Typography>
             <Typography variant="body2">
               {language.RESSOURCES}:
             </Typography>
-            <Typography variant="body1" style={{ marginBottom: '5px' }} >
+            <Typography variant="body1" style={{ marginBottom: '5px' }}>
               {!displayEvent ? '' : displayEvent.ressources.replace(/<[^>]*>/g, '')}
             </Typography>
           </DialogContent>
@@ -106,8 +107,8 @@ WeekView.propTypes = {
 };
 
 WeekView.defaultProps = {
-  start: 7,
-  end: 19,
+  // start: 7,
+  // end: 20,
   style: {},
   eventData: {},
 };

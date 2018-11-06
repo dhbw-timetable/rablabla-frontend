@@ -35,6 +35,9 @@ const darkTheme = createMuiTheme({
         backgroundColor: '#4f5b62',
         color: '#263238',
       },
+      timeline: {
+        color: '#f57c00',
+      },
       dayheader: {
         backgroundColor: '#4f5b62',
       },
@@ -103,6 +106,9 @@ const alternativeTheme = createMuiTheme({
         backgroundColor: '#ffffff',
         color: '#b2b2b2',
       },
+      timeline: {
+        color: '#f73996',
+      },
       dayheader: {
         backgroundColor: '#ffffff',
       },
@@ -167,6 +173,9 @@ const lightTheme = createMuiTheme({
       sidetimesview: {
         backgroundColor: '#fff',
         color: '#b2b2b2',
+      },
+      timeline: {
+        color: '#8b8b8b',
       },
       dayheader: {
         backgroundColor: '#fff',

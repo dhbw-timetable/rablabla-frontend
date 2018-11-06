@@ -50,12 +50,12 @@ export default class NavigationBar extends React.Component {
     if (titleMode === 0) { // MONTH
       titleComponent = (
         <Typography onClick={this.toggleTitleMode} variant="title" color="inherit">
-          {`${displayDate.format(document.body.clientWidth > 375 ? 'MMMM YYYY' : 'MMMM')}`}
+          {`${displayDate.format(document.body.clientWidth > 475 ? 'MMMM YYYY' : 'MMMM')}`}
         </Typography>);
     } else if (titleMode === 1) { // KW
       titleComponent = (
         <Typography onClick={this.toggleTitleMode} variant="title" color="inherit">
-          {`KW${displayDate.isoWeek()} ${document.body.clientWidth > 375 ? displayDate.format('YYYY') : ''}`}
+          {`KW${displayDate.isoWeek()} ${document.body.clientWidth > 475 ? displayDate.format('YYYY') : ''}`}
         </Typography>);
     } else { // REACT
       titleComponent = (
