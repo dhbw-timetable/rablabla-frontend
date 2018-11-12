@@ -37,8 +37,27 @@ export default class Onboarding extends React.Component {
     this.setState({ linkValid });
     if (linkValid) {
       window.removeEventListener('keypress', this.handleKeypress);
-      this.props.applyOnboarding(link);
+      const trimmedLink = this.trimLink(link);
+      this.props.applyOnboarding(trimmedLink);
     }
+  };
+
+  trimLink = (link) => {
+    const baseUrl = link.substring(0, link.indexOf('?'));
+    const args = link.substring(link.indexOf('?') + 1, link.length).split('&');
+    const allowedKeys = ['key', 'user', 'file', 'page'];
+    const trimmedArgs = args.filter((el) => {
+      try {
+        return allowedKeys.some((key) => {
+          // console.log(`${key} + ${el} = ${el.split('=')[0].toLowerCase() == key}`);
+          return el.split('=')[0].toLowerCase() === key;
+        });
+      } catch (err) {
+        console.log(`Found illegal arg causing: ${err}`);
+      }
+      return false;
+    });
+    return `${baseUrl}?${trimmedArgs}`;
   };
 
   render() {
