@@ -252,7 +252,8 @@ export default class App extends React.Component {
 
   onGetDone = (preparedData) => {
     const eventData = Object.keys(this.state.eventData).filter((weekKey) => {
-      return Math.abs(moment(weekKey, 'DD.MM.YYYY').diff(moment(), 'days')) <= 42;
+      const dist = Math.abs(moment(weekKey, 'DD.MM.YYYY').diff(moment(), 'days'));
+      return dist <= 42 && dist > 30;
     }).reduce((obj, key) => {
       obj[key] = this.state.eventData[key];
       return obj;
