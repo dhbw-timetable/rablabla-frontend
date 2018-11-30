@@ -1,6 +1,6 @@
 export default {
   APP_NAME: 'Rablabla',
-  VERSION: 'v0.0.3',
+  VERSION: 'v0.0.4',
   REFRESH: 'Refresh',
   GITHUB: 'GitHub',
   PREFERENCES: 'Preferences',
