@@ -9,7 +9,7 @@
     "ajv": "^6.5.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint-config-react-app": "^5.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "material-ui-pickers": "1.0.0-rc.10",
     "moment": "^2.22.2",
     "prop-types": "^15.6.1",
